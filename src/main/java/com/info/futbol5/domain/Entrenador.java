@@ -10,6 +10,14 @@ public class Entrenador extends Persona{
         calcularEdad();
     }
 
+    @Override
+    public String toString() {
+        return" Nombre= "+ getNombre() + 
+            " Apellido= "+ getApellido()  +
+            " Edad= " + getEdad()  +
+            " Equipo='" + getEquipo();
+    }
+
     public int getEdad() {
         return this.edad;
     }

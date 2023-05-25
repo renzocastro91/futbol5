@@ -13,6 +13,14 @@ public class Equipo {
     public Equipo() {
     }
 
+    @Override
+    public String toString() {
+        return " Nombre='" + getNombre() +
+            " FechaCreacion='" + getFechaCreacion() +
+            " Jugadores='" + getJugadores() +
+            " Nombre de la Cancha= " + getNombreCancha();
+    }
+
 
     public String getNombre() {
         return this.nombre;

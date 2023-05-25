@@ -7,6 +7,11 @@ public class Posicion {
     public Posicion() {
     }
 
+    @Override
+    public String toString() {
+        return  getNombre();
+    }
+
     public String getNombre() {
         return this.nombre;
     }

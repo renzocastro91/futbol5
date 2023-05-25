@@ -1,6 +1,6 @@
 package com.info.futbol5.domain;
 import java.util.*;
-
+ 
 public class Jugador extends Persona {
     private UUID id;
     private double altura;
@@ -9,6 +9,19 @@ public class Jugador extends Persona {
     private int partidos;
     private boolean esCapitan;
     private int numeroCamiseta;
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", altura='" + getAltura() + "'" +
+            ", posicion='" + getPosicion() + "'" +
+            ", goles='" + getGoles() + "'" +
+            ", partidos='" + getPartidos() + "'" +
+            ", esCapitan='" + isEsCapitan() + "'" +
+            ", numeroCamiseta='" + getNumeroCamiseta() + "'" +
+            "}";
+    }
 
     public Jugador() {
     }
