@@ -1,10 +1,9 @@
 package com.info.futbol5.service.posicion.impl;
 import com.info.futbol5.domain.Posicion;
 import com.info.futbol5.service.posicion.ServicePosicion;
-import com.info.futbol5.service.entrada.impl.InputService;
+import com.info.futbol5.service.entrada.console.impl.InputService;
 
 public class ServicePosicionImpl implements ServicePosicion {
-
     @Override
     public Posicion crearPosicion() {
         System.out.println("-->POSICION<--");

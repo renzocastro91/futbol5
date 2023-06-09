@@ -1,0 +1,10 @@
+Fernando;Caceres;Masculino;1990;1.75;Mediocampista;3;4;True;91
+Alejandro;Sanchez;Masculino;1992;1.80;Defensor;2;3;False;87
+Gabriela;Lopez;Femenino;1993;1.70;Delantero;4;2;False;89
+Luis;Garcia;Masculino;1988;1.85;Arquero;1;1;False;90
+Andrea;Hernandez;Femenino;1995;1.72;Mediocampista;3;4;False;86
+Carlos;Mendoza;Masculino;1991;1.79;Defensor;2;3;False;88
+Sofia;Martinez;Femenino;1994;1.68;Delantero;4;2;False;91
+Javier;Gonzalez;Masculino;1989;1.82;Arquero;1;1;False;89
+Natalia;Ramirez;Femenino;1990;1.65;Mediocampista;3;4;False;87
+Jose;Torres;Masculino;1993;1.76;Defensor;2;3;False;86

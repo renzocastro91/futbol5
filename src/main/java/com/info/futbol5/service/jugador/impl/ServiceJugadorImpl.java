@@ -4,7 +4,7 @@ import java.util.UUID;
 import com.info.futbol5.domain.Jugador;
 import com.info.futbol5.domain.Posicion;
 import com.info.futbol5.service.jugador.ServiceJugador;
-import com.info.futbol5.service.entrada.impl.InputService;
+import com.info.futbol5.service.entrada.console.impl.InputService;
 import com.info.futbol5.service.posicion.impl.ServicePosicionImpl;
 
 public class ServiceJugadorImpl implements ServiceJugador {

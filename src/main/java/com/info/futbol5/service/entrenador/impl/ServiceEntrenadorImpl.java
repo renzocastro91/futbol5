@@ -2,10 +2,10 @@ package com.info.futbol5.service.entrenador.impl;
 import com.info.futbol5.domain.Entrenador;
 import com.info.futbol5.domain.Equipo;
 import com.info.futbol5.service.entrenador.ServiceEntrenador;
-import com.info.futbol5.service.entrada.impl.InputService;
+import com.info.futbol5.service.entrada.console.impl.InputService;
+
 
 public class ServiceEntrenadorImpl implements ServiceEntrenador {
-
     @Override
     public Entrenador crearEntrenador(Equipo equipo){
         System.out.println("-->ENTRENADOR<--");

@@ -12,15 +12,13 @@ public class Jugador extends Persona {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", altura='" + getAltura() + "'" +
-            ", posicion='" + getPosicion() + "'" +
-            ", goles='" + getGoles() + "'" +
-            ", partidos='" + getPartidos() + "'" +
-            ", esCapitan='" + isEsCapitan() + "'" +
-            ", numeroCamiseta='" + getNumeroCamiseta() + "'" +
-            "}";
+        return " Id= " + getId() +
+            " Altura= " + getAltura() +
+            " Posicion= " + getPosicion() +
+            " Goles='" + getGoles()  +
+            " Partidos= " + getPartidos() +
+            " Capitan= " + isEsCapitan()  +
+            " Numero Camiseta= " + getNumeroCamiseta();
     }
 
     public Jugador() {

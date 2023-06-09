@@ -1,4 +1,4 @@
-package com.info.futbol5.service.entrada.impl;
+package com.info.futbol5.service.entrada.console.impl;
 import java.util.Scanner;
 
 public class InputService {

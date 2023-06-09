@@ -7,7 +7,6 @@ public class Equipo {
     private LocalDate fechaCreacion;
     private List<Jugador> jugadores;
     private String nombreCancha;
-    private List<Jugador> titulares;
 
 
     public Equipo() {
@@ -52,14 +51,6 @@ public class Equipo {
 
     public void setNombreCancha(String nombreCancha) {
         this.nombreCancha = nombreCancha;
-    }
-
-    public List<Jugador> getTitulares() {
-        return this.titulares;
-    }
-
-    public void setTitulares(List<Jugador> titulares) {
-        this.titulares = titulares;
     }
 
 }

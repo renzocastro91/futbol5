@@ -11,6 +11,14 @@ public class Persona {
     }
 
 
+    @Override
+    public String toString() {
+        return " Nombre= " + getNombre() +
+            " Apellido='" + getApellido() +
+            " Sexo= " + getSexo() +
+            " Anio Nacimiento= " + getAnioNacimiento();
+    }
+    
     public String getNombre() {
         return this.nombre;
     }

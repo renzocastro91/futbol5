@@ -3,15 +3,13 @@ package com.info.futbol5.service.equipo.impl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.info.futbol5.domain.Equipo;
 import com.info.futbol5.domain.Jugador;
 import com.info.futbol5.service.equipo.ServiceEquipo;
-import com.info.futbol5.service.entrada.impl.InputService;
+import com.info.futbol5.service.entrada.console.impl.InputService;
 import com.info.futbol5.service.jugador.impl.ServiceJugadorImpl;
 
 public class ServiceEquipoImpl implements ServiceEquipo {
-
     @Override
     public Equipo crearEquipo() {
         System.out.println("-->Equipo<--");
