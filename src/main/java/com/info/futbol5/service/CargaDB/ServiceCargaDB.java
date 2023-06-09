@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ServiceCargaDB {
     List<Jugador> cargaJugadores(String rutaArchivo);
-    List<Equipo> cargaEquipos(List<Jugador> jugadores, String rutaArchivo);
+    List<Equipo> cargaEquipos(List<List<Jugador>> jugadores, String rutaArchivo);
     List<Entrenador> cargaEntrenadores(List<Equipo> equipos, String rutaArchivo);
 
 }

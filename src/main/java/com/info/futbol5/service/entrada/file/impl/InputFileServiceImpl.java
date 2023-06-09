@@ -74,10 +74,34 @@ public class InputFileServiceImpl implements InputFileService{
         return jugadores;
     }
 
+    @Override
+    public List<List<Jugador>> loadListadeListadeJugadores(List<Jugador> jugadores) {
+        List<List<Jugador>> listaDeListaDeJugadores = new ArrayList<>();
+        List<Jugador> listaJugadores = new ArrayList<>();
+        int contador = 0;
+        for (Jugador jugador: jugadores) {
+            listaJugadores.add(jugador);
+            contador++;
+
+            if (contador == 5) {
+                listaDeListaDeJugadores.add(listaJugadores);
+                listaJugadores = new ArrayList<>(); // Crear una nueva lista
+                contador = 0; // Reiniciar el contador
+            }
+        }
+        // Agregar la última lista de jugadores si no alcanzó a completarse 5 jugadores
+        if (!listaJugadores.isEmpty()) {
+            listaDeListaDeJugadores.add(listaJugadores);
+        }
+
+        return listaDeListaDeJugadores;
+    }
+
 
     @Override
-    public List<Equipo> loadEquipoByFile(String rutaArchivo, List<Jugador> jugadores) {
+    public List<Equipo> loadEquipoByFile(String rutaArchivo, List<List<Jugador>> jugadores) {
         List<Equipo> equipos = new ArrayList<>();
+        int cont = 0;
         try{
             List<String> lineas = FileUtils.readLines(new File(rutaArchivo), StandardCharsets.UTF_8);
             for (String linea : lineas) {
@@ -88,7 +112,8 @@ public class InputFileServiceImpl implements InputFileService{
                 equipo.setNombre(nombre);
                 equipo.setNombreCancha(nombreCancha);
                 equipo.setFechaCreacion(LocalDate.now());
-                equipo.setJugadores(jugadores);
+                equipo.setJugadores(jugadores.get(cont));
+                cont ++;
                 equipos.add(equipo);
             }
 

@@ -19,7 +19,7 @@ public class ServiceCargaDBImpl implements ServiceCargaDB {
     }
 
     @Override
-    public List<Equipo> cargaEquipos(List<Jugador> jugadores, String rutaArchivo) {
+    public List<Equipo> cargaEquipos(List<List<Jugador>> jugadores, String rutaArchivo) {
         InputFileService inputFileService = new InputFileServiceImpl();
         List<Equipo> equipos = inputFileService.loadEquipoByFile(rutaArchivo, jugadores);
         return equipos;
