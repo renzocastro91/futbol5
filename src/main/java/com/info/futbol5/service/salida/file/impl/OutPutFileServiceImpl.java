@@ -1,5 +1,7 @@
 package com.info.futbol5.service.salida.file.impl;
 
+import com.info.futbol5.domain.Entrenador;
+import com.info.futbol5.domain.Equipo;
 import com.info.futbol5.domain.Jugador;
 import com.info.futbol5.service.salida.file.OutPutFileService;
 
@@ -32,5 +34,44 @@ public class OutPutFileServiceImpl implements OutPutFileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void exportarEquipos(List<Equipo> equipos, String rutaDeDestino) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaDeDestino))) {
+            for (Equipo equipo: equipos ) {
+                String linea = equipo.getNombre() + ";" +
+                        equipo.getNombreCancha() ;
+
+                writer.write(linea);
+                writer.newLine();
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void exportarEntrenador(List<Entrenador> entrenadores, String rutaDeDestino) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaDeDestino))) {
+            for (Entrenador entrenador: entrenadores ) {
+                String linea = entrenador.getNombre() + ";" +
+                        entrenador.getApellido() + ";" +
+                        entrenador.getSexo() + ";" +
+                        entrenador.getAnioNacimiento()+ ";" +
+                        entrenador.getEquipo().getNombre();
+
+                writer.write(linea);
+                writer.newLine();
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

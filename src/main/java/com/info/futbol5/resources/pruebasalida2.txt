@@ -1,0 +1,3 @@
+Marcos;Ramirez;Masculino;1991;Scorpianos
+Roberto;Martinez;Masculino;1990;Rentails
+Juliana;Tristan;Femenino;1995;TruckTeam

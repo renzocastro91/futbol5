@@ -9,6 +9,8 @@ import com.info.futbol5.service.CargaDB.ServiceCargaDB;
 import com.info.futbol5.service.CargaDB.impl.ServiceCargaDBImpl;
 import com.info.futbol5.service.entrada.file.InputFileService;
 import com.info.futbol5.service.entrada.file.impl.InputFileServiceImpl;
+import com.info.futbol5.service.salida.file.OutPutFileService;
+import com.info.futbol5.service.salida.file.impl.OutPutFileServiceImpl;
 
 import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
@@ -21,15 +23,10 @@ import java.util.*;
 public class App 
 {
     private static Scanner scanner = new Scanner(System.in);
-    static ServiceCargaDB servicioCargaDB = new ServiceCargaDBImpl();
-    static String rutaArchivoJ = "src\\main\\java\\com\\info\\futbol5\\resources\\jugador_IO.txt";
-    static String rutaArchivoE = "src\\main\\java\\com\\info\\futbol5\\resources\\equipo_IO.txt";
-    static String rutaArchivoEn = "src\\main\\java\\com\\info\\futbol5\\resources\\entrenador_IO.txt";
-    static List<Jugador> todosLosJugadores = servicioCargaDB.cargaJugadores(rutaArchivoJ);
-    static InputFileService inputFileService = new InputFileServiceImpl();
-    static List<List<Jugador>> listaDeListaDeJug = inputFileService.loadListadeListadeJugadores(todosLosJugadores);
-    static List<Equipo> todosLosEquipos =servicioCargaDB.cargaEquipos(listaDeListaDeJug,rutaArchivoE);
-    static List<Entrenador> todosLosEntrenadores = servicioCargaDB.cargaEntrenadores(todosLosEquipos,rutaArchivoEn);
+    static List<Jugador> todosLosJugadores = new ArrayList<>();
+    static List<List<Jugador>> listaDeListaDeJug =  new ArrayList<>();
+    static List<Equipo> todosLosEquipos = new ArrayList<>();
+    static List<Entrenador> todosLosEntrenadores = new ArrayList<>();
 
     public static void main( String[] args )  {
 
@@ -44,7 +41,8 @@ public class App
             System.out.println("5. Eliminar un equipo");
             System.out.println("6. Importar lista de jugadores desde archivo");
             System.out.println("7. Exportar lista de jugadores a archivo");
-            System.out.println("8. Salir");
+            System.out.println("8. Listar todo");
+            System.out.println("9. Salir");
 
             System.out.print("Ingrese una opción: ");
             int opcion = scanner.nextInt();
@@ -73,6 +71,24 @@ public class App
                     exportarListaJugadores();
                     break;
                 case 8:
+                    System.out.println("-------------------------------------------------------------");
+                    System.out.println(todosLosJugadores.size());
+                    for (Jugador jugador: todosLosJugadores){
+                        System.out.println(jugador.toString());
+                    }
+                    System.out.println("-------------------------------------------------------------");
+                    System.out.println(todosLosEquipos.size());
+                    for (Equipo equipo: todosLosEquipos){
+                        System.out.println(equipo.toString());
+                    }
+                    System.out.println("-------------------------------------------------------------");
+                    System.out.println(todosLosEntrenadores.size());
+                    for (Entrenador entrenador: todosLosEntrenadores){
+                        System.out.println(entrenador.toString());
+                    }
+                    System.out.println("-------------------------------------------------------------");
+                    break;
+                case 9:
                     salir = true;
                     break;
                 default:
@@ -251,15 +267,67 @@ public class App
     }
 
     public static void eliminarEquipo() {
-        // Implementar la lógica para eliminar un equipo
+        System.out.println("------------------------------------------");
+        System.out.println("Eliminar un equipo");
+        System.out.println("------------------------------------------");
+        System.out.println("Ingrese Nombre de equipo a buscar:");
+        String nombreEquipo = getScanner().nextLine();
+        Entrenador entrenadorRes = new Entrenador();
+        Equipo equipoRes = new Equipo();
+        ArrayList<Jugador> jugadoresAEliminar = new ArrayList<>();
+
+        boolean bandera = false;
+        for (Equipo equipo: todosLosEquipos) {
+            if (Objects.equals(nombreEquipo, equipo.getNombre())){
+                equipoRes = equipo;
+                bandera = true;
+                for (Entrenador entrenador: todosLosEntrenadores) {
+                    if (Objects.equals(entrenador.getEquipo().getNombre(), equipo.getNombre())){
+                        entrenadorRes = entrenador;
+                    }
+                }
+                for (Jugador jugador: equipo.getJugadores()) {
+                    for (Jugador jugador1: todosLosJugadores) {
+                        if (jugador.getId() == jugador1.getId()){
+                            jugadoresAEliminar.add(jugador);
+                        }
+                    }
+                }
+
+        }
+
+    }
+        if (bandera){
+            todosLosEntrenadores.remove(entrenadorRes);
+            todosLosJugadores.removeAll(jugadoresAEliminar);
+            todosLosEquipos.remove(equipoRes);
+            System.out.println("Equipo Eliminado!");
+        }else{
+            System.out.println("Equipo No encontrado");
+        }
     }
 
     public static void importarListaJugadores() {
-        // Implementar la lógica para importar la lista de jugadores desde un archivo
+        ServiceCargaDB servicioCargaDB = new ServiceCargaDBImpl();
+        String rutaArchivoJ = "src\\main\\java\\com\\info\\futbol5\\resources\\jugador_IO.txt";
+        String rutaArchivoE = "src\\main\\java\\com\\info\\futbol5\\resources\\equipo_IO.txt";
+        String rutaArchivoEn = "src\\main\\java\\com\\info\\futbol5\\resources\\entrenador_IO.txt";
+        todosLosJugadores = servicioCargaDB.cargaJugadores(rutaArchivoJ);
+        InputFileService inputFileService = new InputFileServiceImpl();
+        listaDeListaDeJug = inputFileService.loadListadeListadeJugadores(todosLosJugadores);
+        todosLosEquipos =servicioCargaDB.cargaEquipos(listaDeListaDeJug,rutaArchivoE);
+        todosLosEntrenadores = servicioCargaDB.cargaEntrenadores(todosLosEquipos,rutaArchivoEn);
     }
 
     public static void exportarListaJugadores() {
-        // Implementar la lógica para exportar la lista de jugadores a un archivo
+        OutPutFileService outPutFileService= new OutPutFileServiceImpl();
+        String rutaArchivoSalida = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida.txt";
+        String rutaArchivoSalida1 = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida1.txt";
+        String rutaArchivoSalida2 = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida2.txt";
+        outPutFileService.exportJugadores(todosLosJugadores, rutaArchivoSalida);
+        outPutFileService.exportarEquipos(todosLosEquipos, rutaArchivoSalida1);
+        outPutFileService.exportarEntrenador(todosLosEntrenadores, rutaArchivoSalida2);
+
     }
 
     public static Scanner getScanner() {
