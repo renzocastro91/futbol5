@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class InputFileServiceImpl implements InputFileService{
                 int goles = Integer.parseInt(partes[6]);
                 int partidos = Integer.parseInt(partes[7]);
                 boolean cap ;
-                if (partes[8] == "True"){
+                if (Objects.equals(partes[8], "True")){
                     cap = true;
                 }else{
                     cap = false;
@@ -52,6 +53,7 @@ public class InputFileServiceImpl implements InputFileService{
                 newJugador.setApellido(apellido);
                 newJugador.setSexo(sexo);
                 newJugador.setAnioNacimiento(anioNacimiento);
+                newJugador.calcularEdad();
                 newJugador.setId(id);
                 newJugador.setAltura(altura);
                 newJugador.setPosicion(posicion);
@@ -108,7 +110,7 @@ public class InputFileServiceImpl implements InputFileService{
             for (String linea : lineas) {
                 String[] partes = linea.split(";");
                 for (Equipo equipo: equipos){
-                    if (partes[4] == equipo.getNombre()){
+                    if (Objects.equals(partes[4], equipo.getNombre())){
                         String nombre = partes[0];
                         String apellido = partes[1];
                         String sexo = partes[2];
@@ -118,6 +120,7 @@ public class InputFileServiceImpl implements InputFileService{
                         entrenador.setApellido(apellido);
                         entrenador.setSexo(sexo);
                         entrenador.setAnioNacimiento(anioNacimiento);
+                        entrenador.calcularEdad();
                         entrenador.setEquipo(equipo);
                         entrenadores.add(entrenador);
                     }

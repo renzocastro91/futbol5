@@ -1,13 +1,19 @@
 package com.info.futbol5.domain;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class Persona {
     private String nombre;
     private String apellido;
     private String sexo;
     private int anioNacimiento;
 
+    private int edad;
+
 
     public Persona() {
+
     }
 
 
@@ -16,7 +22,8 @@ public class Persona {
         return " Nombre= " + getNombre() +
             " Apellido='" + getApellido() +
             " Sexo= " + getSexo() +
-            " Anio Nacimiento= " + getAnioNacimiento();
+            " Anio Nacimiento= " + getAnioNacimiento()+
+            " Edad= " + getEdad();
     }
     
     public String getNombre() {
@@ -49,6 +56,22 @@ public class Persona {
 
     public void setAnioNacimiento(int anioNacimiento) {
         this.anioNacimiento = anioNacimiento;
+    }
+
+    public void calcularEdad() {
+        LocalDate fechaActual = LocalDate.now();
+        int anioActual = fechaActual.getYear();
+
+        Period periodo = Period.between(LocalDate.of(this.anioNacimiento, 1, 1), LocalDate.of(anioActual, fechaActual.getMonthValue(), fechaActual.getDayOfMonth()));
+        setEdad(periodo.getYears());
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad){
+        this.edad = edad;
     }
 
 }

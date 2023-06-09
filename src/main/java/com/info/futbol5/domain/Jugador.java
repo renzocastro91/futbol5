@@ -13,6 +13,7 @@ public class Jugador extends Persona {
     @Override
     public String toString() {
         return " Id= " + getId() +
+                super.toString() +
             " Altura= " + getAltura() +
             " Posicion= " + getPosicion() +
             " Goles='" + getGoles()  +
