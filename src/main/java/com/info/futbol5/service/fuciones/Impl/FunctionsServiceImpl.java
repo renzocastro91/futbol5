@@ -3,18 +3,21 @@ package com.info.futbol5.service.fuciones.Impl;
 import com.info.futbol5.domain.Entrenador;
 import com.info.futbol5.domain.Equipo;
 import com.info.futbol5.domain.Jugador;
-import com.info.futbol5.domain.Posicion;
 import com.info.futbol5.service.CargaDB.ServiceCargaDB;
 import com.info.futbol5.service.CargaDB.impl.ServiceCargaDBImpl;
-import com.info.futbol5.service.entrada.console.InputServiceInterface;
 import com.info.futbol5.service.entrada.console.impl.InputService;
 import com.info.futbol5.service.entrada.file.InputFileService;
 import com.info.futbol5.service.entrada.file.impl.InputFileServiceImpl;
+import com.info.futbol5.service.entrenador.ServiceEntrenador;
+import com.info.futbol5.service.entrenador.impl.ServiceEntrenadorImpl;
+import com.info.futbol5.service.equipo.ServiceEquipo;
+import com.info.futbol5.service.equipo.impl.ServiceEquipoImpl;
 import com.info.futbol5.service.fuciones.FunctionsService;
+import com.info.futbol5.service.jugador.ServiceJugador;
+import com.info.futbol5.service.jugador.impl.ServiceJugadorImpl;
 import com.info.futbol5.service.salida.file.OutPutFileService;
 import com.info.futbol5.service.salida.file.impl.OutPutFileServiceImpl;
 
-import java.time.LocalDate;
 import java.util.*;
 
 
@@ -30,6 +33,7 @@ public class FunctionsServiceImpl implements FunctionsService {
         boolean salir = false;
         InputService.createScanner();
         while (!salir) {
+            clearScreen();
             System.out.println("-------------------------------------------------------------");
             System.out.println("----- MENÚ -----");
             System.out.println("-------------------------------------------------------------");
@@ -98,6 +102,7 @@ public class FunctionsServiceImpl implements FunctionsService {
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
             }
+            clearScreen();
         }
 
         System.out.println("¡Hasta luego!");
@@ -108,6 +113,7 @@ public class FunctionsServiceImpl implements FunctionsService {
     private void masOpciones() {
         int opcion;
         do {
+            clearScreen();
             System.out.println("----- Mas Opciones -----");
             System.out.println("1. Buscar equipo por nombre (ordenado por nombre)");
             System.out.println("2. Buscar equipo por nombre (ordenado por número de camiseta)");
@@ -145,6 +151,7 @@ public class FunctionsServiceImpl implements FunctionsService {
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
             }
+
         } while (opcion != 0);
 
     }
@@ -153,113 +160,20 @@ public class FunctionsServiceImpl implements FunctionsService {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Menu Para la carga de Equipo");
         System.out.println("-------------------------------------------------------------");
-        System.out.println("Jugadores");
-        System.out.println("-------------------------------------------------------------");
-        int cont = 0;
-        List<Jugador> jugadoresEquipo = new ArrayList<>();
-        String[] posiciones = {"Arquero", "Defensor", "Mediocampista","Mediocampista" ,"Delantero"};
-        for (int i=0; i < 5; i++){
-            System.out.println(posiciones[cont]);
-            Jugador newJugador = new Jugador();
-            System.out.println("Nombre:");
-            newJugador.setNombre(InputService.scanner.nextLine());
-            System.out.println("Apellido:");
-            newJugador.setApellido(InputService.scanner.nextLine());
-            System.out.println("Sexo:");
-            newJugador.setSexo(InputService.scanner.nextLine());
-            System.out.println("Año Nacimiento:");
-            newJugador.setAnioNacimiento(InputService.scanner.nextInt());
-            InputService.scanner.nextLine();
-            newJugador.calcularEdad();
-            UUID id = UUID.randomUUID();
-            newJugador.setId(id);
-            System.out.println("Altura:");
-            newJugador.setAltura(InputService.scanner.nextDouble());
-            InputService.scanner.nextLine();
-            Posicion newPosicion = new Posicion();
-            newPosicion.setNombre(posiciones[cont]);
-            newJugador.setPosicion(newPosicion);
-            System.out.println("Goles:");
-            newJugador.setGoles(InputService.scanner.nextInt());
-            InputService.scanner.nextLine();
-            System.out.println("Partidos:");
-            newJugador.setPartidos(InputService.scanner.nextInt());
-            InputService.scanner.nextLine();
-            System.out.println("Es Capitan? s o n");
-            String ent = InputService.scanner.nextLine();
-            boolean bandera = true;
-            while (bandera) {
-                if (Objects.equals(ent, "s")) {
-                    // Verificar si ya existe un capitán en el equipo
-                    boolean existeCapitan = jugadoresEquipo.stream().anyMatch(Jugador::isEsCapitan);
-                    if (existeCapitan) {
-                        System.out.println("Ya existe un capitán en el equipo.");
-                        System.out.println("Seleccione otra opción:");
-                        ent = InputService.scanner.nextLine();
-                    } else {
-                        newJugador.setEsCapitan(true);
-                        bandera = false;
-                    }
-                } else if (Objects.equals(ent, "n")) {
-                    newJugador.setEsCapitan(false);
-                    bandera = false;
-                } else {
-                    System.out.println("Opción incorrecta. Ingrese nuevamente:");
-                    ent = InputService.scanner.nextLine();
-                }
-            }
-
-            System.out.println("N° Camiseta:");
-            int numeroCamiseta = InputService.scanner.nextInt();
-            InputService.scanner.nextLine();
-
-            int finalNumeroCamiseta = numeroCamiseta;
-            boolean numeroCamisetaExistente = jugadoresEquipo.stream()
-                    .anyMatch(jugador -> jugador.getNumeroCamiseta() == finalNumeroCamiseta);
-
-            while (numeroCamisetaExistente) {
-                System.out.println("El número de camiseta ya está en uso.");
-                System.out.println("Ingrese otro número de camiseta:");
-                numeroCamiseta = InputService.scanner.nextInt();
-                InputService.scanner.nextLine();
-
-                int finalNumeroCamiseta1 = numeroCamiseta;
-                numeroCamisetaExistente = jugadoresEquipo.stream()
-                        .anyMatch(jugador -> jugador.getNumeroCamiseta() == finalNumeroCamiseta1);
-            }
-
-            newJugador.setNumeroCamiseta(numeroCamiseta);
-            todosLosJugadores.add(newJugador);
-            jugadoresEquipo.add(newJugador);
-            cont ++;
+        ServiceJugador serviceJugador = new ServiceJugadorImpl();
+        List<Jugador> jugadoresEquipo = serviceJugador.crearJugadores();
+        for (Jugador jugador: jugadoresEquipo ) {
+            todosLosJugadores.add(jugador);
         }
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Equipo");
-        System.out.println("-------------------------------------------------------------");
-        Equipo newEquipo = new Equipo();
-        System.out.println("Nombre Equipo:");
-        newEquipo.setNombre(InputService.scanner.nextLine());
-        newEquipo.setFechaCreacion(LocalDate.now());
-        newEquipo.setJugadores(jugadoresEquipo);
-        System.out.println("Nombre Cancha:");
-        newEquipo.setNombreCancha(InputService.scanner.nextLine());
+        ServiceEquipo serviceEquipo = new ServiceEquipoImpl();
+        Equipo newEquipo = serviceEquipo.crearEquipo(jugadoresEquipo);
         todosLosEquipos.add(newEquipo);
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Entrenador");
-        System.out.println("-------------------------------------------------------------");
-        Entrenador newEntrenador = new Entrenador();
-        System.out.println("Nombre:");
-        newEntrenador.setNombre(InputService.scanner.nextLine());
-        System.out.println("Apellido:");
-        newEntrenador.setApellido(InputService.scanner.nextLine());
-        System.out.println("Sexo:");
-        newEntrenador.setSexo(InputService.scanner.nextLine());
-        System.out.println("Año Nacimiento:");
-        newEntrenador.setAnioNacimiento(InputService.scanner.nextInt());
-        InputService.scanner.nextLine();
-        newEntrenador.calcularEdad();
-        newEntrenador.setEquipo(newEquipo);
+        ServiceEntrenador serviceEntrenador = new ServiceEntrenadorImpl();
+        Entrenador newEntrenador = serviceEntrenador.crearEntrenador(newEquipo);
         todosLosEntrenadores.add(newEntrenador);
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("Carga de equipo exitoso!");
+        System.out.println("-------------------------------------------------------------");
 
     }
 
@@ -331,6 +245,7 @@ public class FunctionsServiceImpl implements FunctionsService {
                         System.out.println("Entrenador: " + entrenador.getNombre());
                     }
                 }
+                System.out.println("Jugadores:");
                 for (Jugador jugador: equipo.getJugadores()) {
                     System.out.println("Nombre: "+ jugador.getNombre() + " " + jugador.getPosicion().getNombre());
                 }
@@ -629,5 +544,10 @@ public class FunctionsServiceImpl implements FunctionsService {
         String rutaArchivoSalida = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida.txt";
         outPutFileService.exportJugadores(listaJugadoresAuxiliar, rutaArchivoSalida);
         System.out.println("Archivos de Jugadores exportados con éxito");
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

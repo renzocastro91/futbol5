@@ -1,59 +1,99 @@
 package com.info.futbol5.service.jugador.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import com.info.futbol5.domain.Jugador;
 import com.info.futbol5.domain.Posicion;
 import com.info.futbol5.service.jugador.ServiceJugador;
 import com.info.futbol5.service.entrada.console.impl.InputService;
-import com.info.futbol5.service.posicion.impl.ServicePosicionImpl;
+
 
 public class ServiceJugadorImpl implements ServiceJugador {
 
-    @Override
-    public Jugador crearJugador() {
-        System.out.println("-->Jugador<--");
-        Jugador nuevoJugador = new Jugador();
-        nuevoJugador.setId(UUID.randomUUID());
-        System.out.println("Ingrese Nombre");
-        nuevoJugador.setNombre(InputService.getScanner().nextLine());
-        System.out.println("Ingrese Apellido");
-        nuevoJugador.setApellido(InputService.getScanner().nextLine());
-        System.out.println("Ingrese Anio de nacimiento");
-        nuevoJugador.setAnioNacimiento(InputService.getScanner().nextInt());
-        System.out.println("Ingrese Sexo");
-        nuevoJugador.setSexo(InputService.getScanner().nextLine());
-        System.out.println("Ingrese Altura");
-        nuevoJugador.setAltura(InputService.getScanner().nextDouble());
-        System.out.println("Cree una posición para el jugador");
-        ServicePosicionImpl PosicionSer = new ServicePosicionImpl();
-        Posicion nuevaPosicion = PosicionSer.crearPosicion();
-        nuevoJugador.setPosicion(nuevaPosicion);
-        nuevoJugador.setGoles(0);
-        nuevoJugador.setPartidos(0);
-        nuevoJugador.setEsCapitan(determinarCapitan());
-        System.out.println("Ingrese Numero de camiseta");
-        nuevoJugador.setNumeroCamiseta(InputService.getScanner().nextInt());
-        return nuevoJugador;
-    }
 
     @Override
-    public boolean determinarCapitan() {
-        boolean esCapitan = false;
-        int cap;
-        System.out.println("Este jugador es capitan? 1- SI 2 - NO");
-        cap = InputService.getScanner().nextInt();
-        switch (cap){
-            case 1:
-            esCapitan = true; 
-            break;
-            case 2: 
-            esCapitan = false;
-            break;
-            default: 
-            System.out.println("Opción incorrecta");
-            determinarCapitan();
+    public List<Jugador> crearJugadores() {
+        System.out.println("Jugadores");
+        System.out.println("-------------------------------------------------------------");
+        int cont = 0;
+        List<Jugador> jugadoresEquipo = new ArrayList<>();
+        String[] posiciones = {"Arquero", "Defensor", "Mediocampista","Mediocampista" ,"Delantero"};
+        for (int i=0; i < 5; i++){
+            System.out.println(posiciones[cont]);
+            Jugador newJugador = new Jugador();
+            System.out.println("Nombre:");
+            newJugador.setNombre(InputService.scanner.nextLine());
+            System.out.println("Apellido:");
+            newJugador.setApellido(InputService.scanner.nextLine());
+            System.out.println("Sexo:");
+            newJugador.setSexo(InputService.scanner.nextLine());
+            System.out.println("Año Nacimiento:");
+            newJugador.setAnioNacimiento(InputService.scanner.nextInt());
+            InputService.scanner.nextLine();
+            newJugador.calcularEdad();
+            UUID id = UUID.randomUUID();
+            newJugador.setId(id);
+            System.out.println("Altura:");
+            newJugador.setAltura(InputService.scanner.nextDouble());
+            InputService.scanner.nextLine();
+            Posicion newPosicion = new Posicion();
+            newPosicion.setNombre(posiciones[cont]);
+            newJugador.setPosicion(newPosicion);
+            System.out.println("Goles:");
+            newJugador.setGoles(InputService.scanner.nextInt());
+            InputService.scanner.nextLine();
+            System.out.println("Partidos:");
+            newJugador.setPartidos(InputService.scanner.nextInt());
+            InputService.scanner.nextLine();
+            System.out.println("Es Capitan? s o n");
+            String ent = InputService.scanner.nextLine();
+            boolean bandera = true;
+            while (bandera) {
+                if (Objects.equals(ent, "s")) {
+                    // Verificar si ya existe un capitán en el equipo
+                    boolean existeCapitan = jugadoresEquipo.stream().anyMatch(Jugador::isEsCapitan);
+                    if (existeCapitan) {
+                        System.out.println("Ya existe un capitán en el equipo.");
+                        System.out.println("Seleccione otra opción:");
+                        ent = InputService.scanner.nextLine();
+                    } else {
+                        newJugador.setEsCapitan(true);
+                        bandera = false;
+                    }
+                } else if (Objects.equals(ent, "n")) {
+                    newJugador.setEsCapitan(false);
+                    bandera = false;
+                } else {
+                    System.out.println("Opción incorrecta. Ingrese nuevamente:");
+                    ent = InputService.scanner.nextLine();
+                }
+            }
+
+            System.out.println("N° Camiseta:");
+            int numeroCamiseta = InputService.scanner.nextInt();
+            InputService.scanner.nextLine();
+
+            int finalNumeroCamiseta = numeroCamiseta;
+            boolean numeroCamisetaExistente = jugadoresEquipo.stream()
+                    .anyMatch(jugador -> jugador.getNumeroCamiseta() == finalNumeroCamiseta);
+
+            while (numeroCamisetaExistente) {
+                System.out.println("El número de camiseta ya está en uso.");
+                System.out.println("Ingrese otro número de camiseta:");
+                numeroCamiseta = InputService.scanner.nextInt();
+                InputService.scanner.nextLine();
+
+                int finalNumeroCamiseta1 = numeroCamiseta;
+                numeroCamisetaExistente = jugadoresEquipo.stream()
+                        .anyMatch(jugador -> jugador.getNumeroCamiseta() == finalNumeroCamiseta1);
+            }
+
+            newJugador.setNumeroCamiseta(numeroCamiseta);
+            jugadoresEquipo.add(newJugador);
+            cont ++;
         }
-        return esCapitan; 
+        return jugadoresEquipo;
     }
-    
 }

@@ -8,17 +8,21 @@ import com.info.futbol5.service.entrada.console.impl.InputService;
 public class ServiceEntrenadorImpl implements ServiceEntrenador {
     @Override
     public Entrenador crearEntrenador(Equipo equipo){
-        System.out.println("-->ENTRENADOR<--");
-        Entrenador nuevoEntrenador = new Entrenador();
-        System.out.println("Ingrese Nombre");
-        nuevoEntrenador.setNombre(InputService.getScanner().nextLine());
-        System.out.println("Ingrese Apellido");
-        nuevoEntrenador.setApellido(InputService.getScanner().nextLine());
-        System.out.println("Ingrese Anio de nacimiento");
-        nuevoEntrenador.setAnioNacimiento(InputService.getScanner().nextInt());
-        System.out.println("Ingrese Sexo");
-        nuevoEntrenador.setSexo(InputService.getScanner().nextLine());
-        nuevoEntrenador.setEquipo(equipo);
-        return nuevoEntrenador;
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("Entrenador");
+        System.out.println("-------------------------------------------------------------");
+        Entrenador newEntrenador = new Entrenador();
+        System.out.println("Nombre:");
+        newEntrenador.setNombre(InputService.scanner.nextLine());
+        System.out.println("Apellido:");
+        newEntrenador.setApellido(InputService.scanner.nextLine());
+        System.out.println("Sexo:");
+        newEntrenador.setSexo(InputService.scanner.nextLine());
+        System.out.println("Año Nacimiento:");
+        newEntrenador.setAnioNacimiento(InputService.scanner.nextInt());
+        InputService.scanner.nextLine();
+        newEntrenador.calcularEdad();
+        newEntrenador.setEquipo(equipo);
+        return newEntrenador;
     }
 }
