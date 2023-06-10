@@ -41,6 +41,9 @@ public class OutPutFileServiceImpl implements OutPutFileService {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaDeDestino))) {
             for (Equipo equipo: equipos ) {
                 String linea = equipo.getNombre() + ";" +
+                        equipo.getFechaCreacion().getYear() + ";" +
+                        equipo.getFechaCreacion().getMonthValue() + ";" +
+                        equipo.getFechaCreacion().getDayOfMonth() + ";" +
                         equipo.getNombreCancha() ;
 
                 writer.write(linea);

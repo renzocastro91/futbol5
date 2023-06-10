@@ -107,11 +107,15 @@ public class InputFileServiceImpl implements InputFileService{
             for (String linea : lineas) {
                 String[] partes = linea.split(";");
                 String nombre = partes[0];
-                String nombreCancha = partes[1];
+                int anio = Integer.parseInt(partes[1]);
+                int mes = Integer.parseInt(partes[2]);
+                int dia = Integer.parseInt(partes[3]);
+                String nombreCancha = partes[4];
                 Equipo equipo = new Equipo();
                 equipo.setNombre(nombre);
+                LocalDate fechaCreacion = LocalDate.of(anio,mes,dia);
+                equipo.setFechaCreacion(fechaCreacion);
                 equipo.setNombreCancha(nombreCancha);
-                equipo.setFechaCreacion(LocalDate.now());
                 equipo.setJugadores(jugadores.get(cont));
                 cont ++;
                 equipos.add(equipo);
