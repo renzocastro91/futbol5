@@ -1,5 +1,0 @@
-asas;asas;asas;156;1.56;Arquero;65;9;False;15
-ghgh;ghgh;m;1855;1.56;Defensor;5;15;True;56
-hhhhj;hjhj;m;1558;1.54;Mediocampista;56;25;False;15
-sdfsdf;sdfsdf;m;1855;1.56;Mediocampista;56;100;False;26
-fgfgf;gfgfg;m;1888;45.5;Delantero;26;15;False;2
