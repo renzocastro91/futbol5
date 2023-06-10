@@ -1,11 +1,9 @@
-com\info\futbol5\service\posicion\impl\ServicePosicionImpl.class
 com\info\futbol5\service\entrada\console\InputServiceInterface.class
 com\info\futbol5\service\jugador\impl\ServiceJugadorImpl.class
 com\info\futbol5\service\equipo\ServiceEquipo.class
 com\info\futbol5\service\equipo\impl\ServiceEquipoImpl.class
 com\info\futbol5\App.class
 com\info\futbol5\domain\Entrenador.class
-com\info\futbol5\service\posicion\ServicePosicion.class
 com\info\futbol5\service\entrada\file\impl\InputFileServiceImpl.class
 com\info\futbol5\domain\Persona.class
 com\info\futbol5\service\entrada\file\InputFileService.class
