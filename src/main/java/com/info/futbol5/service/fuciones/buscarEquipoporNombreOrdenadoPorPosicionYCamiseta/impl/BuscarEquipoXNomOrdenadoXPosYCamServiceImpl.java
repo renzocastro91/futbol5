@@ -1,0 +1,2 @@
+package com.info.futbol5.service.fuciones.buscarEquipoporNombreOrdenadoPorPosicionYCamiseta.impl;public class BuscarEquipoXNomOrdenadoXPosYCamServiceImpl {
+}

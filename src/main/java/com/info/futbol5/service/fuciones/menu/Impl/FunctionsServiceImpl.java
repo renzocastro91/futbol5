@@ -24,7 +24,6 @@ import java.util.*;
 
 public class FunctionsServiceImpl implements FunctionsService {
     static List<Jugador> todosLosJugadores = new ArrayList<>();
-    static List<List<Jugador>> listaDeListaDeJug =  new ArrayList<>();
     static List<Equipo> todosLosEquipos = new ArrayList<>();
     static List<Entrenador> todosLosEntrenadores = new ArrayList<>();
     @Override
@@ -160,14 +159,15 @@ public class FunctionsServiceImpl implements FunctionsService {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Menu Para la carga de Equipo");
         System.out.println("-------------------------------------------------------------");
+        ServiceEquipo serviceEquipo = new ServiceEquipoImpl();
+        Equipo newEquipo = serviceEquipo.crearEquipo();
+        todosLosEquipos.add(newEquipo);
         ServiceJugador serviceJugador = new ServiceJugadorImpl();
-        List<Jugador> jugadoresEquipo = serviceJugador.crearJugadores();
+        List<Jugador> jugadoresEquipo = serviceJugador.crearJugadores(newEquipo);
         for (Jugador jugador: jugadoresEquipo ) {
             todosLosJugadores.add(jugador);
+            newEquipo.getJugadores().add(jugador);
         }
-        ServiceEquipo serviceEquipo = new ServiceEquipoImpl();
-        Equipo newEquipo = serviceEquipo.crearEquipo(jugadoresEquipo);
-        todosLosEquipos.add(newEquipo);
         ServiceEntrenador serviceEntrenador = new ServiceEntrenadorImpl();
         Entrenador newEntrenador = serviceEntrenador.crearEntrenador(newEquipo);
         todosLosEntrenadores.add(newEntrenador);
@@ -304,11 +304,9 @@ public class FunctionsServiceImpl implements FunctionsService {
         String rutaArchivoJ = "src\\main\\java\\com\\info\\futbol5\\resources\\jugador_IO.txt";
         String rutaArchivoE = "src\\main\\java\\com\\info\\futbol5\\resources\\equipo_IO.txt";
         String rutaArchivoEn = "src\\main\\java\\com\\info\\futbol5\\resources\\entrenador_IO.txt";
-        todosLosJugadores = servicioCargaDB.cargaJugadores(rutaArchivoJ);
-        InputFileService inputFileService = new InputFileServiceImpl();
-        listaDeListaDeJug = inputFileService.loadListadeListadeJugadores(todosLosJugadores);
-        todosLosEquipos =servicioCargaDB.cargaEquipos(listaDeListaDeJug,rutaArchivoE);
-        todosLosEntrenadores = servicioCargaDB.cargaEntrenadores(todosLosEquipos,rutaArchivoEn);
+        todosLosEquipos =servicioCargaDB.cargaEquipos(rutaArchivoE);
+        todosLosJugadores = servicioCargaDB.cargaJugadores(rutaArchivoJ,todosLosEquipos);
+        todosLosEntrenadores = servicioCargaDB.cargaEntrenadores(rutaArchivoEn,todosLosEquipos);
         System.out.println("Archivos de Jugadores, Equipos y Entrenadores importados con éxito");
     }
 

@@ -1,0 +1,2 @@
+package com.info.futbol5.service.fuciones.buscarEquipoPorNombreOrdenadoPorCamiseta;public interface BuscarEquipoPorNombreOrdenadoPorCamisetaService {
+}
