@@ -1,1 +1,4 @@
-Scorpinchis;2023;6;9;ScorpArena
+Scorpianos;2020;1;3;PotreroArena
+Rentails;2021;2;3;CampitoArena
+TruckTeam;2019;5;7;TrucStation
+GogosTeam;2018;6;25;GogoStation

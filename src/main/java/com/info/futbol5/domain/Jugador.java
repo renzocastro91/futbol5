@@ -9,6 +9,7 @@ public class Jugador extends Persona {
     private int partidos;
     private boolean esCapitan;
     private int numeroCamiseta;
+    private Equipo equipo;
 
     @Override
     public String toString() {
@@ -19,7 +20,8 @@ public class Jugador extends Persona {
             " Goles='" + getGoles()  +
             " Partidos= " + getPartidos() +
             " Capitan= " + isEsCapitan()  +
-            " Numero Camiseta= " + getNumeroCamiseta();
+            " Numero Camiseta= " + getNumeroCamiseta() +
+                " Equipo= " + getEquipo().getNombre();
     }
 
     public Jugador() {
@@ -86,6 +88,11 @@ public class Jugador extends Persona {
         this.numeroCamiseta = numeroCamiseta;
     }
 
-   
+    public Equipo getEquipo(){
+        return this.equipo;
+    }
 
+    public void setEquipo(Equipo equipo){
+        this.equipo = equipo;
+    }
 }

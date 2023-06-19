@@ -24,7 +24,8 @@ public class OutPutFileServiceImpl implements OutPutFileService {
                         jugador.getGoles() +";" +
                         jugador.getPartidos() + ";" +
                         ((jugador.getEsCapitan())? "True":"False") + ";" +
-                        jugador.getNumeroCamiseta();
+                        jugador.getNumeroCamiseta()+ ";" +
+                        jugador.getEquipo().getNombre();
 
                 writer.write(linea);
                 writer.newLine();

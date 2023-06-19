@@ -8,8 +8,7 @@ import com.info.futbol5.domain.Jugador;
 
 
 public interface InputFileService {
-  List<Jugador> loadJugadorByFile(String rutaArchivo);
-  List<List<Jugador>> loadListadeListadeJugadores(List<Jugador> jugadores);
-  List<Equipo> loadEquipoByFile(String rutaArchivo, List<List<Jugador>> jugadores);
+  List<Jugador> loadJugadorByFile(String rutaArchivo, List<Equipo> equipos);
+  List<Equipo> loadEquipoByFile(String rutaArchivo);
   List<Entrenador> loadEntranadorByFile(String rutaArchivo, List<Equipo> equipos);
 }

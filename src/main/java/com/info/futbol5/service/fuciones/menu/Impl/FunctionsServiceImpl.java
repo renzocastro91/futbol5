@@ -1,22 +1,38 @@
-package com.info.futbol5.service.fuciones.Impl;
+package com.info.futbol5.service.fuciones.menu.Impl;
 
 import com.info.futbol5.domain.Entrenador;
 import com.info.futbol5.domain.Equipo;
 import com.info.futbol5.domain.Jugador;
-import com.info.futbol5.service.CargaDB.ServiceCargaDB;
-import com.info.futbol5.service.CargaDB.impl.ServiceCargaDBImpl;
 import com.info.futbol5.service.entrada.console.impl.InputService;
-import com.info.futbol5.service.entrada.file.InputFileService;
-import com.info.futbol5.service.entrada.file.impl.InputFileServiceImpl;
-import com.info.futbol5.service.entrenador.ServiceEntrenador;
-import com.info.futbol5.service.entrenador.impl.ServiceEntrenadorImpl;
-import com.info.futbol5.service.equipo.ServiceEquipo;
-import com.info.futbol5.service.equipo.impl.ServiceEquipoImpl;
-import com.info.futbol5.service.fuciones.FunctionsService;
-import com.info.futbol5.service.jugador.ServiceJugador;
-import com.info.futbol5.service.jugador.impl.ServiceJugadorImpl;
-import com.info.futbol5.service.salida.file.OutPutFileService;
-import com.info.futbol5.service.salida.file.impl.OutPutFileServiceImpl;
+import com.info.futbol5.service.fuciones.buscarEquipoPorNombre.BuscarEquipoXNombreService;
+import com.info.futbol5.service.fuciones.buscarEquipoPorNombre.impl.BuscarEquipoXNombreServiceImpl;
+import com.info.futbol5.service.fuciones.buscarEquipoPorNombreOrdenadoPorCamiseta.BuscarEquipoPorNombreOrdenadoPorCamisetaService;
+import com.info.futbol5.service.fuciones.buscarEquipoPorNombreOrdenadoPorCamiseta.impl.BuscarEquipoPorNombreOrdenadoPorCamisetaServiceImpl;
+import com.info.futbol5.service.fuciones.buscarEquipoPorNombreOrdenadoPorNombre.BuscarEquipoXNombreOrdenadoXNombre;
+import com.info.futbol5.service.fuciones.buscarEquipoPorNombreOrdenadoPorNombre.impl.BuscarEquipoXNombreOrdenadoXNombreServiceImpl;
+import com.info.futbol5.service.fuciones.buscarEquipoporNombreOrdenadoPorPosicionYCamiseta.BuscarEquipoXNomOrdenadoXPosYCamService;
+import com.info.futbol5.service.fuciones.buscarEquipoporNombreOrdenadoPorPosicionYCamiseta.impl.BuscarEquipoXNomOrdenadoXPosYCamServiceImpl;
+import com.info.futbol5.service.fuciones.buscarJugadorPorNombre.BuscarJugadorXNombreService;
+import com.info.futbol5.service.fuciones.buscarJugadorPorNombre.impl.BuscarJugadorXNombreServiceImpl;
+import com.info.futbol5.service.fuciones.crearEquipo.CrearEquipoService;
+import com.info.futbol5.service.fuciones.crearEquipo.impl.CrearEquipoImpl;
+import com.info.futbol5.service.fuciones.eliminaarEquipo.EliminarEquipoService;
+import com.info.futbol5.service.fuciones.eliminaarEquipo.impl.EliminarEquipoServiceImpl;
+import com.info.futbol5.service.fuciones.exportarJugadoresOrdenadosPorNombre.ExportarJugadoresOrdenadosPorNombreService;
+import com.info.futbol5.service.fuciones.exportarJugadoresOrdenadosPorNombre.impl.ExportarJugadoresOrdenadosPorNombreServiceImpl;
+import com.info.futbol5.service.fuciones.exportarJugadoresOrdenadosPorNumCamiseta.ExportarJugadoresOrdenadosXNumCamisetaService;
+import com.info.futbol5.service.fuciones.exportarJugadoresOrdenadosPorNumCamiseta.impl.ExportarJugadoresOrdenadosXNumCamisetaServiceImpl;
+import com.info.futbol5.service.fuciones.exportarJugadoresPorPosicionYCamiseta.ExportarJugadoresOrdenadosXPosYCamService;
+import com.info.futbol5.service.fuciones.exportarJugadoresPorPosicionYCamiseta.impl.ExportarJugadoresOrdenadosXPosYCamServiceImpl;
+import com.info.futbol5.service.fuciones.exportarListaDeJugadores.ExportarListaDeJugadoresService;
+import com.info.futbol5.service.fuciones.exportarListaDeJugadores.impl.ExportarListaDeJugadoresServiceImpl;
+import com.info.futbol5.service.fuciones.importarListasDeJugadores.ImportarListaDeJugadoresService;
+import com.info.futbol5.service.fuciones.importarListasDeJugadores.impl.ImportarListaDeJugadoresServiceImpl;
+import com.info.futbol5.service.fuciones.listarTodo.ListarTodoService;
+import com.info.futbol5.service.fuciones.listarTodo.impl.ListarTodoServiceImpl;
+import com.info.futbol5.service.fuciones.menu.FunctionsService;
+import com.info.futbol5.service.fuciones.mostrarJugadoresDeEquipo.MostrarJugadoresDeEquipoService;
+import com.info.futbol5.service.fuciones.mostrarJugadoresDeEquipo.impl.MostrarJugadoresDeEquipoServiceImpl;
 
 import java.util.*;
 
@@ -53,43 +69,38 @@ public class FunctionsServiceImpl implements FunctionsService {
 
             switch (opcion) {
                 case 1:
-                    crearEquipo();
+                    CrearEquipoService crearEquipoService = new CrearEquipoImpl();
+                    crearEquipoService.creoEquipo(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
                     break;
                 case 2:
-                    buscarJugadorPorNombre();
+                    BuscarJugadorXNombreService buscarJugadorXNombreService = new BuscarJugadorXNombreServiceImpl();
+                    buscarJugadorXNombreService.buscaJugadorxNombre(todosLosEquipos);
                     break;
                 case 3:
-                    buscarEquipoPorNombre();
+                    BuscarEquipoXNombreService buscarEquipoXNombreService = new BuscarEquipoXNombreServiceImpl();
+                    buscarEquipoXNombreService.buscaEquipoXNombre(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 4:
-                    mostrarJugadoresDeEquipo();
+                    MostrarJugadoresDeEquipoService mostrarJugadoresDeEquipoService = new MostrarJugadoresDeEquipoServiceImpl();
+                    mostrarJugadoresDeEquipoService.muestraJugadoresDeEquipo(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 5:
-                    eliminarEquipo();
+                    EliminarEquipoService eliminarEquipoService = new EliminarEquipoServiceImpl();
+                    eliminarEquipoService.eliminaEquipo(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
                     break;
                 case 6:
-                    importarListaJugadores();
+                    ImportarListaDeJugadoresService importarListaDeJugadoresService = new ImportarListaDeJugadoresServiceImpl();
+                    todosLosEquipos = importarListaDeJugadoresService.importaListaDeEquipos();
+                    todosLosJugadores = importarListaDeJugadoresService.importaListaDeJugadores(todosLosEquipos);
+                    todosLosEntrenadores = importarListaDeJugadoresService.importaListaDeEntrenadores(todosLosEquipos);
                     break;
                 case 7:
-                    exportarListaJugadores();
+                    ExportarListaDeJugadoresService exportarListaDeJugadoresService = new ExportarListaDeJugadoresServiceImpl();
+                    exportarListaDeJugadoresService.exporteListaDeJugadores(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
                     break;
                 case 8:
-                    System.out.println("-------------------------------------------------------------");
-                    System.out.println(todosLosJugadores.size());
-                    for (Jugador jugador: todosLosJugadores){
-                        System.out.println(jugador.toString());
-                    }
-                    System.out.println("-------------------------------------------------------------");
-                    System.out.println(todosLosEquipos.size());
-                    for (Equipo equipo: todosLosEquipos){
-                        System.out.println(equipo.toString());
-                    }
-                    System.out.println("-------------------------------------------------------------");
-                    System.out.println(todosLosEntrenadores.size());
-                    for (Entrenador entrenador: todosLosEntrenadores){
-                        System.out.println(entrenador.toString());
-                    }
-                    System.out.println("-------------------------------------------------------------");
+                    ListarTodoService listarTodoService = new ListarTodoServiceImpl();
+                    listarTodoService.listaTodo(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
                     break;
                 case 9:
                     masOpciones();
@@ -127,25 +138,31 @@ public class FunctionsServiceImpl implements FunctionsService {
 
             switch (opcion) {
                 case 1:
-                    buscarEquipoPorNombreOrdenadoPorNombre();
+                    BuscarEquipoXNombreOrdenadoXNombre buscarEquipoXNombreOrdenadoXNombre = new BuscarEquipoXNombreOrdenadoXNombreServiceImpl();
+                    buscarEquipoXNombreOrdenadoXNombre.busqueEquipoXNombreOrdenadoXNombre(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 2:
-                    buscarEquipoPorNombreOrdenadoPorCamiseta();
+                    BuscarEquipoPorNombreOrdenadoPorCamisetaService buscarEquipoPorNombreOrdenadoPorCamisetaService = new BuscarEquipoPorNombreOrdenadoPorCamisetaServiceImpl();
+                    buscarEquipoPorNombreOrdenadoPorCamisetaService.busqueEquipoPorNombreOrdenadoPorCamiseta(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 3:
-                    buscarEquipoPorNombreOrdenadoPorPosicionYCamiseta();
+                    BuscarEquipoXNomOrdenadoXPosYCamService buscarEquipoXNomOrdenadoXPosYCamService = new BuscarEquipoXNomOrdenadoXPosYCamServiceImpl();
+                    buscarEquipoXNomOrdenadoXPosYCamService.busqueEquipoXNomOrdenadoXPosyCam(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 4:
-                    exportarJugadoresOrdenadosPorNombre();
+                    ExportarJugadoresOrdenadosPorNombreService exportarJugadoresOrdenadosPorNombreService = new ExportarJugadoresOrdenadosPorNombreServiceImpl();
+                    exportarJugadoresOrdenadosPorNombreService.exporteJugadresOrdenadosXNombre(todosLosEquipos);
                     break;
                 case 5:
-                    exportarJugadoresOrdenadosPorNumeroCamiseta();
+                    ExportarJugadoresOrdenadosXNumCamisetaService exportarJugadoresOrdenadosXNumCamisetaService = new ExportarJugadoresOrdenadosXNumCamisetaServiceImpl();
+                    exportarJugadoresOrdenadosXNumCamisetaService.exporteJugadoresOrdenadosXNumCamiseta(todosLosEquipos);
                     break;
                 case 6:
-                    exportarJugadoresOrdenadosPorPosicionYCamiseta();
+                    ExportarJugadoresOrdenadosXPosYCamService exportarJugadoresOrdenadosXPosYCamService = new ExportarJugadoresOrdenadosXPosYCamServiceImpl();
+                    exportarJugadoresOrdenadosXPosYCamService.exporteJugadoresOrdenadosXPosYCam(todosLosEquipos);
                     break;
                 case 0:
-                    System.out.println("Saliendo del programa...");
+                    System.out.println("Volviendo al menú principal...");
                     break;
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
@@ -155,394 +172,6 @@ public class FunctionsServiceImpl implements FunctionsService {
 
     }
 
-    public static void crearEquipo() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Menu Para la carga de Equipo");
-        System.out.println("-------------------------------------------------------------");
-        ServiceEquipo serviceEquipo = new ServiceEquipoImpl();
-        Equipo newEquipo = serviceEquipo.crearEquipo();
-        todosLosEquipos.add(newEquipo);
-        ServiceJugador serviceJugador = new ServiceJugadorImpl();
-        List<Jugador> jugadoresEquipo = serviceJugador.crearJugadores(newEquipo);
-        for (Jugador jugador: jugadoresEquipo ) {
-            todosLosJugadores.add(jugador);
-            newEquipo.getJugadores().add(jugador);
-        }
-        ServiceEntrenador serviceEntrenador = new ServiceEntrenadorImpl();
-        Entrenador newEntrenador = serviceEntrenador.crearEntrenador(newEquipo);
-        todosLosEntrenadores.add(newEntrenador);
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Carga de equipo exitoso!");
-        System.out.println("-------------------------------------------------------------");
-
-    }
-
-    public static void buscarJugadorPorNombre() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Buscar Jugador por nombre");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Ingrese Nombre de jugador a buscar:");
-        String nombreJugador =InputService.scanner.nextLine();
-        boolean bandera = false;
-        for (Equipo equipo: todosLosEquipos) {
-            for (Jugador jugador: equipo.getJugadores()) {
-                if (Objects.equals(nombreJugador, jugador.getNombre())){
-                    System.out.println("Nombre: " + jugador.getNombre());
-                    System.out.println("Apellido: " + jugador.getApellido());
-                    System.out.println("Posicion: "+ jugador.getPosicion().getNombre());
-                    System.out.println("Capitan: "+ jugador.getEsCapitan());
-                    System.out.println("Equipo: "+ equipo.getNombre());
-                    bandera = true;
-                }
-            }
-        }
-        if (!bandera){
-            System.out.println("Jugador no encontrado");
-        }
-
-    }
-
-    public static void buscarEquipoPorNombre() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Buscar Equipo por nombre");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Ingrese Nombre de equipo a buscar:");
-        String nombreEquipo = InputService.scanner.nextLine();
-        boolean bandera = false;
-        for (Equipo equipo: todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())){
-                System.out.println("Nombre: "+ equipo.getNombre());
-                for (Entrenador entrenador: todosLosEntrenadores) {
-                    if (Objects.equals(entrenador.getEquipo().getNombre(), equipo.getNombre())) {
-                        System.out.println("Entrenador: " + entrenador.getNombre());
-                    }
-                }
-                for (Jugador jugador: equipo.getJugadores()) {
-                    if (jugador.getEsCapitan()){
-                        System.out.println("Capitan: "+ jugador.getNombre());
-                    }
-                }
-                bandera = true;
-            }
-        }
-        if (!bandera){
-            System.out.println("Equipo No encontrado");
-        }
-    }
-
-    public static void mostrarJugadoresDeEquipo() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Buscar Equipo por nombre y lista jugadores");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Ingrese Nombre de equipo a buscar:");
-        String nombreEquipo = InputService.scanner.nextLine();
-        boolean bandera = false;
-        for (Equipo equipo: todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())){
-                System.out.println("Nombre: "+ equipo.getNombre());
-                for (Entrenador entrenador: todosLosEntrenadores) {
-                    if (Objects.equals(entrenador.getEquipo().getNombre(), equipo.getNombre())) {
-                        System.out.println("Entrenador: " + entrenador.getNombre());
-                    }
-                }
-                System.out.println("Jugadores:");
-                for (Jugador jugador: equipo.getJugadores()) {
-                    System.out.println("Nombre: "+ jugador.getNombre() + " " + jugador.getPosicion().getNombre());
-                }
-                bandera = true;
-            }
-        }
-        if (!bandera){
-            System.out.println("Equipo No encontrado");
-        }
-    }
-
-    public static void eliminarEquipo() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Eliminar un equipo");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Ingrese Nombre de equipo a buscar:");
-        String nombreEquipo = InputService.scanner.nextLine();
-        Entrenador entrenadorRes = new Entrenador();
-        Equipo equipoRes = new Equipo();
-        ArrayList<Jugador> jugadoresAEliminar = new ArrayList<>();
-
-        boolean bandera = false;
-        for (Equipo equipo: todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())){
-                equipoRes = equipo;
-                bandera = true;
-                for (Entrenador entrenador: todosLosEntrenadores) {
-                    if (Objects.equals(entrenador.getEquipo().getNombre(), equipo.getNombre())){
-                        entrenadorRes = entrenador;
-                    }
-                }
-                for (Jugador jugador: equipo.getJugadores()) {
-                    for (Jugador jugador1: todosLosJugadores) {
-                        if (jugador.getId() == jugador1.getId()){
-                            jugadoresAEliminar.add(jugador);
-                        }
-                    }
-                }
-
-            }
-
-        }
-        if (bandera){
-            todosLosEntrenadores.remove(entrenadorRes);
-            todosLosJugadores.removeAll(jugadoresAEliminar);
-            todosLosEquipos.remove(equipoRes);
-            System.out.println("Equipo Eliminado!");
-        }else{
-            System.out.println("Equipo No encontrado");
-        }
-    }
-
-    public static void importarListaJugadores() {
-        System.out.println("-------------------------------------------------------------");
-        ServiceCargaDB servicioCargaDB = new ServiceCargaDBImpl();
-        String rutaArchivoJ = "src\\main\\java\\com\\info\\futbol5\\resources\\jugador_IO.txt";
-        String rutaArchivoE = "src\\main\\java\\com\\info\\futbol5\\resources\\equipo_IO.txt";
-        String rutaArchivoEn = "src\\main\\java\\com\\info\\futbol5\\resources\\entrenador_IO.txt";
-        todosLosEquipos =servicioCargaDB.cargaEquipos(rutaArchivoE);
-        todosLosJugadores = servicioCargaDB.cargaJugadores(rutaArchivoJ,todosLosEquipos);
-        todosLosEntrenadores = servicioCargaDB.cargaEntrenadores(rutaArchivoEn,todosLosEquipos);
-        System.out.println("Archivos de Jugadores, Equipos y Entrenadores importados con éxito");
-    }
-
-    public static void exportarListaJugadores() {
-        System.out.println("-------------------------------------------------------------");
-        OutPutFileService outPutFileService= new OutPutFileServiceImpl();
-        String rutaArchivoSalida = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida.txt";
-        String rutaArchivoSalida1 = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida1.txt";
-        String rutaArchivoSalida2 = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida2.txt";
-        outPutFileService.exportJugadores(todosLosJugadores, rutaArchivoSalida);
-        outPutFileService.exportarEquipos(todosLosEquipos, rutaArchivoSalida1);
-        outPutFileService.exportarEntrenador(todosLosEntrenadores, rutaArchivoSalida2);
-        System.out.println("Archivos de Jugadores, Equipos y Entrenadores exportados con éxito");
-    }
-
-
-    public static void buscarEquipoPorNombreOrdenadoPorNombre() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Buscar Equipo por nombre y Mostrar jugadores ordenados por nombre");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Ingrese Nombre de equipo a buscar:");
-        String nombreEquipo = InputService.scanner.nextLine();
-        boolean bandera = ordenarEquipoPorNombre(nombreEquipo);
-
-        for (Equipo equipo : todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())) {
-                System.out.println("Nombre: " + equipo.getNombre());
-                for (Entrenador entrenador : todosLosEntrenadores) {
-                    if (Objects.equals(entrenador.getEquipo().getNombre(), equipo.getNombre())) {
-                        System.out.println("Entrenador: " + entrenador.getNombre());
-                    }
-                }
-                System.out.println("Jugadores Ordenados por nombre: ");
-                for (Jugador jugador : equipo.getJugadores()) {
-                    System.out.println("-------------------------------------");
-                    System.out.println("Nombre: " + jugador.getNombre());
-                    System.out.println("Apellido: " + jugador.getApellido());
-                    System.out.println("Posicion: " + jugador.getPosicion().getNombre());
-                    System.out.println("Capitan: " + jugador.getEsCapitan());
-                    System.out.println("Equipo: " + equipo.getNombre());
-                }
-                System.out.println("-------------------------------------");
-            }
-
-        }
-
-        if (!bandera){
-            System.out.println("Equipo No encontrado");
-            InputService.scanner.nextLine();
-        }
-    }
-
-    public static boolean ordenarEquipoPorNombre(String nombreEquipo) {
-        for (Equipo equipo : todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())) {
-                Collections.sort(equipo.getJugadores(), new Comparator<Jugador>() {
-                    @Override
-                    public int compare(Jugador o1, Jugador o2) {
-                        return o1.getNombre().compareTo(o2.getNombre());
-                    }
-                });
-                return true;
-            }
-
-        }
-        return false;
-    }
-    public static void buscarEquipoPorNombreOrdenadoPorCamiseta() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Buscar Equipo por nombre y Mostrar jugadores ordenados por n°Camiseta");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Ingrese Nombre de equipo a buscar:");
-        String nombreEquipo = InputService.scanner.nextLine();
-        boolean bandera = ordenarEquipoPorNumCamiseta(nombreEquipo);
-        for (Equipo equipo: todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())){
-                System.out.println("Nombre: "+ equipo.getNombre());
-                for (Entrenador entrenador: todosLosEntrenadores) {
-                    if (Objects.equals(entrenador.getEquipo().getNombre(), equipo.getNombre())) {
-                        System.out.println("Entrenador: " + entrenador.getNombre());
-                    }
-                }
-                Collections.sort(equipo.getJugadores(), new Comparator<Jugador>() {
-                    @Override
-                    public int compare(Jugador o1, Jugador o2) {
-                        return Integer.compare(o1.getNumeroCamiseta(), o2.getNumeroCamiseta());
-                    }
-                });
-                System.out.println("Jugadores Ordenados por número Camiseta: ");
-                for (Jugador jugador: equipo.getJugadores()) {
-                    System.out.println("-------------------------------------");
-                    System.out.println("Nombre: " + jugador.getNombre());
-                    System.out.println("Apellido: " + jugador.getApellido());
-                    System.out.println("N°Camiseta: "+ jugador.getNumeroCamiseta());
-                    System.out.println("Posicion: "+ jugador.getPosicion().getNombre());
-                    System.out.println("Capitan: "+ jugador.getEsCapitan());
-                    System.out.println("Equipo: "+ equipo.getNombre());
-                }
-                System.out.println("-------------------------------------");
-            }
-        }
-        if (!bandera){
-            System.out.println("Equipo No encontrado");
-            InputService.scanner.nextLine();
-        }
-    }
-
-    public static boolean ordenarEquipoPorNumCamiseta(String nombreEquipo){
-        for (Equipo equipo: todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())){
-                Collections.sort(equipo.getJugadores(), new Comparator<Jugador>() {
-                    @Override
-                    public int compare(Jugador o1, Jugador o2) {
-                        return Integer.compare(o1.getNumeroCamiseta(), o2.getNumeroCamiseta());
-                    }
-                });
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public static void buscarEquipoPorNombreOrdenadoPorPosicionYCamiseta() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Buscar Equipo por nombre y Mostrar jugadores ordenados por n°Camiseta");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Ingrese Nombre de equipo a buscar:");
-        String nombreEquipo = InputService.scanner.nextLine();
-        boolean bandera = ordenarPorPosicionYNumCam(nombreEquipo);
-        for (Equipo equipo: todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())){
-                System.out.println("Nombre: "+ equipo.getNombre());
-                for (Entrenador entrenador: todosLosEntrenadores) {
-                    if (Objects.equals(entrenador.getEquipo().getNombre(), equipo.getNombre())) {
-                        System.out.println("Entrenador: " + entrenador.getNombre());
-                    }
-                }
-
-                System.out.println("Jugadores Ordenados por Posición y número Camiseta: ");
-                for (Jugador jugador: equipo.getJugadores()) {
-                    System.out.println("-------------------------------------");
-                    System.out.println("Nombre: " + jugador.getNombre());
-                    System.out.println("Apellido: " + jugador.getApellido());
-                    System.out.println("N°Camiseta: "+ jugador.getNumeroCamiseta());
-                    System.out.println("Posicion: "+ jugador.getPosicion().getNombre());
-                    System.out.println("Capitan: "+ jugador.getEsCapitan());
-                    System.out.println("Equipo: "+ equipo.getNombre());
-                }
-                System.out.println("-------------------------------------");
-                bandera = true;
-            }
-        }
-        if (!bandera){
-            System.out.println("Equipo No encontrado");
-            InputService.scanner.nextLine();
-        }
-    }
-
-    public static boolean ordenarPorPosicionYNumCam(String nombreEquipo){
-        for (Equipo equipo: todosLosEquipos) {
-            if (Objects.equals(nombreEquipo, equipo.getNombre())){
-                Collections.sort(equipo.getJugadores(), new Comparator<Jugador>() {
-                    @Override
-                    public int compare(Jugador o1, Jugador o2) {
-                        // Comparar por posición
-                        int resultado = o1.getPosicion().getNombre().compareTo(o2.getPosicion().getNombre());
-
-                        if (resultado == 0) {
-                            // Si la posición es la misma, comparar por número de camiseta
-                            resultado = Integer.compare(o1.getNumeroCamiseta(), o2.getNumeroCamiseta());
-                        }
-
-                        return resultado;
-                    }
-                });
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void exportarJugadoresOrdenadosPorNombre() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Exportacion lista de jugadores ordenados por nombre");
-        System.out.println("-------------------------------------------------------------");
-        List<Jugador> listaJugadoresAuxiliar = new ArrayList<>();
-        for (Equipo equipo: todosLosEquipos) {
-            ordenarEquipoPorNombre(equipo.getNombre());
-            for (Jugador jugador: equipo.getJugadores()) {
-                listaJugadoresAuxiliar.add(jugador);
-            }
-        }
-        System.out.println("-------------------------------------------------------------");
-        OutPutFileService outPutFileService= new OutPutFileServiceImpl();
-        String rutaArchivoSalida = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida.txt";
-        outPutFileService.exportJugadores(listaJugadoresAuxiliar, rutaArchivoSalida);
-        System.out.println("Archivos de Jugadores exportados con éxito");
-    }
-
-    private void exportarJugadoresOrdenadosPorNumeroCamiseta() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Exportacion lista de jugadores ordenados por N° Camisetas");
-        System.out.println("-------------------------------------------------------------");
-        List<Jugador> listaJugadoresAuxiliar = new ArrayList<>();
-        for (Equipo equipo: todosLosEquipos) {
-            ordenarEquipoPorNumCamiseta(equipo.getNombre());
-            for (Jugador jugador: equipo.getJugadores()) {
-                listaJugadoresAuxiliar.add(jugador);
-            }
-        }
-        System.out.println("-------------------------------------------------------------");
-        OutPutFileService outPutFileService= new OutPutFileServiceImpl();
-        String rutaArchivoSalida = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida.txt";
-        outPutFileService.exportJugadores(listaJugadoresAuxiliar, rutaArchivoSalida);
-        System.out.println("Archivos de Jugadores exportados con éxito");
-    }
-
-    private void exportarJugadoresOrdenadosPorPosicionYCamiseta() {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Exportacion lista de jugadores ordenados por Posicion y N° Camisetas");
-        System.out.println("-------------------------------------------------------------");
-        List<Jugador> listaJugadoresAuxiliar = new ArrayList<>();
-        for (Equipo equipo: todosLosEquipos) {
-            ordenarPorPosicionYNumCam(equipo.getNombre());
-            for (Jugador jugador: equipo.getJugadores()) {
-                listaJugadoresAuxiliar.add(jugador);
-            }
-        }
-        System.out.println("-------------------------------------------------------------");
-        OutPutFileService outPutFileService= new OutPutFileServiceImpl();
-        String rutaArchivoSalida = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida.txt";
-        outPutFileService.exportJugadores(listaJugadoresAuxiliar, rutaArchivoSalida);
-        System.out.println("Archivos de Jugadores exportados con éxito");
-    }
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");

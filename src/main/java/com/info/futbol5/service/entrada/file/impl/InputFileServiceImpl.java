@@ -9,6 +9,9 @@ import java.util.UUID;
 import java.io.File;
 import java.io.IOException;
 
+import com.info.futbol5.service.entrada.console.impl.InputService;
+import com.info.futbol5.service.equipo.ServiceEquipo;
+import com.info.futbol5.service.equipo.impl.ServiceEquipoImpl;
 import org.apache.commons.io.FileUtils;
 
 import com.info.futbol5.domain.Entrenador;
@@ -20,7 +23,7 @@ import com.info.futbol5.service.entrada.file.InputFileService;
 public class InputFileServiceImpl implements InputFileService{
 
     @Override
-    public List<Jugador> loadJugadorByFile(String rutaArchivo) {
+    public List<Jugador> loadJugadorByFile(String rutaArchivo, List<Equipo> equipos) {
         //Inicializamos lista de productos
         List<Jugador> jugadores = new ArrayList<>();
 
@@ -61,47 +64,26 @@ public class InputFileServiceImpl implements InputFileService{
                 newJugador.setPartidos(partidos);
                 newJugador.setEsCapitan(cap);
                 newJugador.setNumeroCamiseta(numeroRemera);
+                for (Equipo equipo: equipos) {
+                    if(Objects.equals(partes[10], equipo.getNombre())){
+                        newJugador.setEquipo(equipo);
+                        equipo.getJugadores().add(newJugador);
+                    }
+                }
 
                 jugadores.add(newJugador);
-                
+
             }
-        }catch (IOException e){
+        }catch (IOException | NullPointerException e){
             throw new RuntimeException(e);
-        }catch(NullPointerException n){
-            System.out.println("Hola soy un error");
-            throw new RuntimeException(n);
         }
         return jugadores;
     }
 
-    @Override
-    public List<List<Jugador>> loadListadeListadeJugadores(List<Jugador> jugadores) {
-        List<List<Jugador>> listaDeListaDeJugadores = new ArrayList<>();
-        List<Jugador> listaJugadores = new ArrayList<>();
-        int contador = 0;
-        for (Jugador jugador: jugadores) {
-            listaJugadores.add(jugador);
-            contador++;
-
-            if (contador == 5) {
-                listaDeListaDeJugadores.add(listaJugadores);
-                listaJugadores = new ArrayList<>(); // Crear una nueva lista
-                contador = 0; // Reiniciar el contador
-            }
-        }
-        // Agregar la última lista de jugadores si no alcanzó a completarse 5 jugadores
-        if (!listaJugadores.isEmpty()) {
-            listaDeListaDeJugadores.add(listaJugadores);
-        }
-
-        return listaDeListaDeJugadores;
-    }
-
 
     @Override
-    public List<Equipo> loadEquipoByFile(String rutaArchivo, List<List<Jugador>> jugadores) {
+    public List<Equipo> loadEquipoByFile(String rutaArchivo) {
         List<Equipo> equipos = new ArrayList<>();
-        int cont = 0;
         try{
             List<String> lineas = FileUtils.readLines(new File(rutaArchivo), StandardCharsets.UTF_8);
             for (String linea : lineas) {
@@ -116,15 +98,13 @@ public class InputFileServiceImpl implements InputFileService{
                 LocalDate fechaCreacion = LocalDate.of(anio,mes,dia);
                 equipo.setFechaCreacion(fechaCreacion);
                 equipo.setNombreCancha(nombreCancha);
-                equipo.setJugadores(jugadores.get(cont));
-                cont ++;
+                List<Jugador> jugadores = new ArrayList<>();
+                equipo.setJugadores(jugadores);
                 equipos.add(equipo);
             }
-
         }catch(IOException e){
             throw new RuntimeException(e);
         }catch(NullPointerException n){
-            System.out.println("Hola soy un error");
             throw new RuntimeException(n);
         }
         return equipos;

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import com.info.futbol5.domain.Equipo;
 import com.info.futbol5.domain.Jugador;
 import com.info.futbol5.domain.Posicion;
 import com.info.futbol5.service.jugador.ServiceJugador;
@@ -14,7 +16,7 @@ public class ServiceJugadorImpl implements ServiceJugador {
 
 
     @Override
-    public List<Jugador> crearJugadores() {
+    public List<Jugador> crearJugadores(Equipo equipo) {
         System.out.println("Jugadores");
         System.out.println("-------------------------------------------------------------");
         int cont = 0;
@@ -91,6 +93,7 @@ public class ServiceJugadorImpl implements ServiceJugador {
             }
 
             newJugador.setNumeroCamiseta(numeroCamiseta);
+            newJugador.setEquipo(equipo);
             jugadoresEquipo.add(newJugador);
             cont ++;
         }

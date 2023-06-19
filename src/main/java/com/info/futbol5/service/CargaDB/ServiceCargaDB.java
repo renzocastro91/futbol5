@@ -7,8 +7,8 @@ import com.info.futbol5.domain.Jugador;
 import java.util.List;
 
 public interface ServiceCargaDB {
-    List<Jugador> cargaJugadores(String rutaArchivo);
-    List<Equipo> cargaEquipos(List<List<Jugador>> jugadores, String rutaArchivo);
-    List<Entrenador> cargaEntrenadores(List<Equipo> equipos, String rutaArchivo);
+    List<Jugador> cargaJugadores(String rutaArchivo, List<Equipo> equipos);
+    List<Equipo> cargaEquipos(String rutaArchivo);
+    List<Entrenador> cargaEntrenadores(String rutaArchivo,List<Equipo> equipos);
 
 }

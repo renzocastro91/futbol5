@@ -5,5 +5,5 @@ import com.info.futbol5.domain.Jugador;
 import java.util.List;
 
 public interface ServiceEquipo {
-    Equipo crearEquipo(List<Jugador> jugadores);
+    Equipo crearEquipo();
 }
