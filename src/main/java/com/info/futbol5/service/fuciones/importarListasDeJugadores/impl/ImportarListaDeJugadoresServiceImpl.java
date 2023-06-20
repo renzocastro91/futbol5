@@ -22,11 +22,11 @@ public class ImportarListaDeJugadoresServiceImpl implements ImportarListaDeJugad
     }
 
     @Override
-    public List<Jugador> importaListaDeJugadores(List<Equipo> todosLosEquipos) {
+    public List<Jugador> importaListaDeJugadores(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
         System.out.println("-------------------------------------------------------------");
         ServiceCargaDB servicioCargaDB = new ServiceCargaDBImpl();
         String rutaArchivoJ = "src\\main\\java\\com\\info\\futbol5\\resources\\jugador_IO.txt";
-        List<Jugador> todosLosJugadores =  servicioCargaDB.cargaJugadores(rutaArchivoJ,todosLosEquipos);
+        List<Jugador> todosLosJugadores =  servicioCargaDB.cargaJugadores(rutaArchivoJ,todosLosEquipos, todosLosEntrenadores);
         return todosLosJugadores;
     }
 

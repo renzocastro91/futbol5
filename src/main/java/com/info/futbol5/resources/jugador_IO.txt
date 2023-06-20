@@ -18,3 +18,8 @@ Carla;Sanchez;Femenino;1997;1.65;Arquero;1;2;False;83;GogosTeam
 Andres;Ramirez;Masculino;1992;1.76;Delantero;4;3;False;91;GogosTeam
 Natalia;Lopez;Femenino;1990;1.68;Mediocampista;3;1;False;88;GogosTeam
 Alejandro;Vargas;Masculino;1996;1.82;Defensor;2;4;False;84;GogosTeam
+Camila;Gómez;Femenino;1995;1.70;Defensor;5;3;False;87;FlyingsTeam
+Gabriel;Fernández;Masculino;1998;1.85;Mediocampista;6;8;False;92;FlyingsTeam
+Sofía;Rodríguez;Femenino;1994;1.67;Delantero;9;7;True;89;FlyingsTeam
+Luis;Torres;Masculino;1991;1.78;Arquero;1;0;False;81;FlyingsTeam
+Martín;Pérez;Masculino;1997;1.81;Defensor;3;2;False;85;FlyingsTeam

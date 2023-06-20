@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 
 import com.info.futbol5.service.entrada.console.impl.InputService;
+import com.info.futbol5.service.entrenador.ServiceEntrenador;
+import com.info.futbol5.service.entrenador.impl.ServiceEntrenadorImpl;
 import com.info.futbol5.service.equipo.ServiceEquipo;
 import com.info.futbol5.service.equipo.impl.ServiceEquipoImpl;
 import org.apache.commons.io.FileUtils;
@@ -64,11 +66,29 @@ public class InputFileServiceImpl implements InputFileService{
                 newJugador.setPartidos(partidos);
                 newJugador.setEsCapitan(cap);
                 newJugador.setNumeroCamiseta(numeroRemera);
+                boolean bandera= false;
                 for (Equipo equipo: equipos) {
                     if(Objects.equals(partes[10], equipo.getNombre())){
                         newJugador.setEquipo(equipo);
                         equipo.getJugadores().add(newJugador);
+                        bandera = true;
                     }
+                }
+                //Caso de que en los archivos de jugadores hayan cargado jugadores de equipos que no existen en los archivos respectivos
+                //completo datos de equipo nuevo y agrego a lista de equipos existentes
+                if(!bandera){
+                    System.out.println("Nuevo equipo encontrado: "+ partes[10]);
+                    System.out.println("Ingrese los datos faltantes del equipo");
+                    Equipo newEquipo = new Equipo();
+                    newEquipo.setNombre(partes[10]);
+                    newEquipo.setFechaCreacion(LocalDate.now());
+                    List<Jugador> jugadoresX = new ArrayList<>();
+                    newEquipo.setJugadores(jugadoresX);
+                    System.out.println("Nombre Cancha:");
+                    newEquipo.setNombreCancha(InputService.scanner.nextLine());
+                    newJugador.setEquipo(newEquipo);
+                    newEquipo.getJugadores().add(newJugador);
+                    equipos.add(newEquipo);
                 }
 
                 jugadores.add(newJugador);
@@ -134,6 +154,25 @@ public class InputFileServiceImpl implements InputFileService{
                         entrenadores.add(entrenador);
                     }
                         
+                }
+            }
+            //Caso de que en los archivos de jugadores hayan cargado jugadores de equipos que no existen en los archivos respectivos
+            //completo datos de entrenador para el equipo nuevo agregado, o los equipos nuevos
+            if (entrenadores.size() < equipos.size()) {
+                for (Equipo equipo : equipos) {
+                    boolean entrenadorAsignado = false;
+                    for (Entrenador entrenador : entrenadores) {
+                        if (entrenador.getEquipo().getNombre().equals(equipo.getNombre())) {
+                            entrenadorAsignado = true;
+                            break;
+                        }
+                    }
+                    if (!entrenadorAsignado) {
+                        System.out.println("Complete datos del entrenador para el equipo: " + equipo.getNombre());
+                        ServiceEntrenador serviceEntrenador = new ServiceEntrenadorImpl();
+                        Entrenador newEntrenador = serviceEntrenador.crearEntrenador(equipo);
+                        entrenadores.add(newEntrenador);
+                    }
                 }
             }
         }catch(IOException e){

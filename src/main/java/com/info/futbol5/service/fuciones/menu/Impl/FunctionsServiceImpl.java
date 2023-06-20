@@ -91,7 +91,7 @@ public class FunctionsServiceImpl implements FunctionsService {
                 case 6:
                     ImportarListaDeJugadoresService importarListaDeJugadoresService = new ImportarListaDeJugadoresServiceImpl();
                     todosLosEquipos = importarListaDeJugadoresService.importaListaDeEquipos();
-                    todosLosJugadores = importarListaDeJugadoresService.importaListaDeJugadores(todosLosEquipos);
+                    todosLosJugadores = importarListaDeJugadoresService.importaListaDeJugadores(todosLosEquipos, todosLosEntrenadores);
                     todosLosEntrenadores = importarListaDeJugadoresService.importaListaDeEntrenadores(todosLosEquipos);
                     break;
                 case 7:

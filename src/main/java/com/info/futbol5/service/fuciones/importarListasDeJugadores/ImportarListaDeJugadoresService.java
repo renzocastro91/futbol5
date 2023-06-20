@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ImportarListaDeJugadoresService {
     List<Equipo> importaListaDeEquipos();
-    List<Jugador> importaListaDeJugadores(List<Equipo> todosLosEquipos);
+    List<Jugador> importaListaDeJugadores(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores);
     List<Entrenador> importaListaDeEntrenadores(List<Equipo> todosLosEquipos);
 }

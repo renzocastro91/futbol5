@@ -12,7 +12,7 @@ import java.util.List;
 public class ServiceCargaDBImpl implements ServiceCargaDB {
 
     @Override
-    public List<Jugador> cargaJugadores(String rutaArchivo, List<Equipo> equipos) {
+    public List<Jugador> cargaJugadores(String rutaArchivo, List<Equipo> equipos, List<Entrenador> todosLosEntrenadores) {
         InputFileService inputFileService = new InputFileServiceImpl();
         List<Jugador> jugadores = inputFileService.loadJugadorByFile(rutaArchivo, equipos);
         return jugadores;
