@@ -1,6 +1,6 @@
 package com.info.futbol5;
-import com.info.futbol5.service.fuciones.menu.FunctionsService;
-import com.info.futbol5.service.fuciones.menu.Impl.FunctionsServiceImpl;
+import com.info.futbol5.service.menu.MenuService;
+import com.info.futbol5.service.menu.impl.MenuServiceImpl;
 
 /**
  * Main Futbol 5
@@ -8,9 +8,8 @@ import com.info.futbol5.service.fuciones.menu.Impl.FunctionsServiceImpl;
 public class App 
 {
    public static void main( String[] args )  {
-       FunctionsService functionsService = new FunctionsServiceImpl();
-       functionsService.logicaFunciones();
-
+       MenuService menuService = new MenuServiceImpl();
+       menuService.menu();
   }
 
 }
