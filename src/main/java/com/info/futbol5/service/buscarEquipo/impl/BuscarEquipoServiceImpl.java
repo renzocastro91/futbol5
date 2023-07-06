@@ -16,7 +16,7 @@ import java.util.Objects;
 public class BuscarEquipoServiceImpl implements BuscarEquipoService {
     private OrdenarEquipoService ordenarEquipoService = new OrdenarEquipoServiceImpl();
     @Override
-    public void buscaEquipoXNombre(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
+    public void buscarEquipoPorNombre(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Buscar Equipo por nombre");
         System.out.println("-------------------------------------------------------------");
@@ -45,7 +45,7 @@ public class BuscarEquipoServiceImpl implements BuscarEquipoService {
     }
 
     @Override
-    public void busqueEquipoPorNombreOrdenadoPorCamiseta(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
+    public void buscarEquipoPorNombreOrdenadoPorNumeroCamiseta(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Buscar Equipo por nombre y Mostrar jugadores ordenados por n°Camiseta");
         System.out.println("-------------------------------------------------------------");
@@ -86,7 +86,7 @@ public class BuscarEquipoServiceImpl implements BuscarEquipoService {
     }
 
     @Override
-    public void busqueEquipoXNombreOrdenadoXNombre(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
+    public void buscarEquipoPorNombreOrdenadoPorNombre(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Buscar Equipo por nombre y Mostrar jugadores ordenados por nombre");
         System.out.println("-------------------------------------------------------------");
@@ -123,7 +123,7 @@ public class BuscarEquipoServiceImpl implements BuscarEquipoService {
     }
 
     @Override
-    public void busqueEquipoXNomOrdenadoXPosyCam(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
+    public void buscarEquipoPorNombreOrdenadoPorPosicionyNumeroCamiseta(List<Equipo> todosLosEquipos, List<Entrenador> todosLosEntrenadores) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Buscar Equipo por nombre y Mostrar jugadores ordenados por n°Camiseta");
         System.out.println("-------------------------------------------------------------");

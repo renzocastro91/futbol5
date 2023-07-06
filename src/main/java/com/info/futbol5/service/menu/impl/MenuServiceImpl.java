@@ -8,12 +8,16 @@ import com.info.futbol5.service.buscarEquipo.impl.BuscarEquipoServiceImpl;
 import com.info.futbol5.service.buscarJugador.BuscarJugadorService;
 import com.info.futbol5.service.buscarJugador.impl.BuscarJugadorServiceImpl;
 import com.info.futbol5.service.entrada.console.impl.InputService;
-import com.info.futbol5.service.creacionEquipo.ServiceEquipo;
-import com.info.futbol5.service.creacionEquipo.impl.ServiceEquipoImpl;
-import com.info.futbol5.service.exportarEJE.ExportarEJEService;
-import com.info.futbol5.service.exportarEJE.impl.ExportarEJEServiceImpl;
-import com.info.futbol5.service.importarEJE.ImportarEJEService;
-import com.info.futbol5.service.importarEJE.impl.ImportarEJEServiceImpl;
+import com.info.futbol5.service.entrenador.EntrenadorService;
+import com.info.futbol5.service.entrenador.impl.EntrenadorServiceImpl;
+import com.info.futbol5.service.equipo.EquipoService;
+import com.info.futbol5.service.equipo.impl.ServiceEquipoImpl;
+import com.info.futbol5.service.exportarEqupoJugadorEntrenador.ExportarEqupoJugadorEntrenadorService;
+import com.info.futbol5.service.exportarEqupoJugadorEntrenador.impl.ExportarEqupoJugadorEntrenadorServiceImpl;
+import com.info.futbol5.service.importarEqupoJugadorEntrenador.ImportarEqupoJugadorEntrenadorService;
+import com.info.futbol5.service.importarEqupoJugadorEntrenador.impl.ImportarEqupoJugadorEntrenadorServiceImpl;
+import com.info.futbol5.service.jugador.JugadorService;
+import com.info.futbol5.service.jugador.impl.JugadorServiceImpl;
 import com.info.futbol5.service.menu.MenuService;
 
 import java.util.ArrayList;
@@ -25,10 +29,12 @@ public class MenuServiceImpl implements MenuService {
     static List<Entrenador> todosLosEntrenadores = new ArrayList<>();
 
     private BuscarEquipoService buscarEquipoService = new BuscarEquipoServiceImpl();
-    private ServiceEquipo serviceEquipo = new ServiceEquipoImpl();
+    private EquipoService equipoService = new ServiceEquipoImpl();
+    private EntrenadorService entrenadorService = new EntrenadorServiceImpl();
+    private JugadorService jugadorService = new JugadorServiceImpl();
     private BuscarJugadorService buscarJugadorService = new BuscarJugadorServiceImpl();
-    private ImportarEJEService importarEJEService = new ImportarEJEServiceImpl();
-    private ExportarEJEService exportarEJEService = new ExportarEJEServiceImpl();
+    private ImportarEqupoJugadorEntrenadorService importarEqupoJugadorEntrenadorService = new ImportarEqupoJugadorEntrenadorServiceImpl();
+    private ExportarEqupoJugadorEntrenadorService exportarEqupoJugadorEntrenadorService = new ExportarEqupoJugadorEntrenadorServiceImpl();
 
 
     @Override
@@ -56,30 +62,32 @@ public class MenuServiceImpl implements MenuService {
 
             switch (opcion) {
                 case 1:
-                    serviceEquipo.creoEquipo(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
+                    equipoService.crearEquipo(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
                     break;
                 case 2:
-                    buscarJugadorService.buscaJugadorxNombre(todosLosEquipos);
+                    buscarJugadorService.buscarJugadorPorNombre(todosLosEquipos);
                     break;
                 case 3:
-                    buscarEquipoService.buscaEquipoXNombre(todosLosEquipos,todosLosEntrenadores);
+                    buscarEquipoService.buscarEquipoPorNombre(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 4:
                     buscarEquipoService.muestraJugadoresDeEquipo(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 5:
-                    serviceEquipo.eliminaEquipo(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
+                    equipoService.eliminarEquipo(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
                     break;
                 case 6:
-                    todosLosEquipos = importarEJEService.importaListaDeEquipos();
-                    todosLosJugadores = importarEJEService.importaListaDeJugadores(todosLosEquipos, todosLosEntrenadores);
-                    todosLosEntrenadores = importarEJEService.importaListaDeEntrenadores(todosLosEquipos);
+                    todosLosEquipos = importarEqupoJugadorEntrenadorService.importaListaDeEquipos();
+                    todosLosJugadores = importarEqupoJugadorEntrenadorService.importaListaDeJugadores(todosLosEquipos, todosLosEntrenadores);
+                    todosLosEntrenadores = importarEqupoJugadorEntrenadorService.importaListaDeEntrenadores(todosLosEquipos);
                     break;
                 case 7:
-                    exportarEJEService.exporteListaDeJugadores(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
+                    exportarEqupoJugadorEntrenadorService.exportarListaDeJugadores(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
                     break;
                 case 8:
-                    listaTodo(todosLosEquipos,todosLosJugadores,todosLosEntrenadores);
+                    jugadorService.listarJugadores(todosLosJugadores);
+                    equipoService.listarEquipos(todosLosEquipos);
+                    entrenadorService.listarEntrenadores(todosLosEntrenadores);
                     break;
                 case 9:
                     masOpciones();
@@ -113,22 +121,22 @@ public class MenuServiceImpl implements MenuService {
 
             switch (opcion) {
                 case 1:
-                    buscarEquipoService.busqueEquipoXNombreOrdenadoXNombre(todosLosEquipos,todosLosEntrenadores);
+                    buscarEquipoService.buscarEquipoPorNombreOrdenadoPorNombre(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 2:
-                    buscarEquipoService.busqueEquipoPorNombreOrdenadoPorCamiseta(todosLosEquipos,todosLosEntrenadores);
+                    buscarEquipoService.buscarEquipoPorNombreOrdenadoPorNumeroCamiseta(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 3:
-                    buscarEquipoService.busqueEquipoXNomOrdenadoXPosyCam(todosLosEquipos,todosLosEntrenadores);
+                    buscarEquipoService.buscarEquipoPorNombreOrdenadoPorPosicionyNumeroCamiseta(todosLosEquipos,todosLosEntrenadores);
                     break;
                 case 4:
-                    exportarEJEService.exporteJugadresOrdenadosXNombre(todosLosEquipos);
+                    exportarEqupoJugadorEntrenadorService.exportarJugadresOrdenadosPorNombre(todosLosEquipos);
                     break;
                 case 5:
-                    exportarEJEService.exporteJugadoresOrdenadosXNumCamiseta(todosLosEquipos);
+                    exportarEqupoJugadorEntrenadorService.exportarJugadoresOrdenadosPorNumeroCamiseta(todosLosEquipos);
                     break;
                 case 6:
-                    exportarEJEService.exporteJugadoresOrdenadosXPosYCam(todosLosEquipos);
+                    exportarEqupoJugadorEntrenadorService.exportarJugadoresOrdenadosPorPosicionYNumeroCamiseta(todosLosEquipos);
                     break;
                 case 0:
                     System.out.println("Volviendo al menú principal...");
@@ -141,28 +149,7 @@ public class MenuServiceImpl implements MenuService {
 
     }
 
-    private void listaTodo(List<Equipo> todosLosEquipos, List<Jugador> todosLosJugadores, List<Entrenador> todosLosEntrenadores) {
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Jugadores");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Cantidad: "+ todosLosJugadores.size());
-        for (Jugador jugador: todosLosJugadores){
-            System.out.println(jugador.toString());
-        }
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Equipos");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Cantidad: "+todosLosEquipos.size());
-        for (Equipo equipo: todosLosEquipos){
-            System.out.println(equipo.toString());
-        }
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Entrenadores");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Cantidad: "+todosLosEntrenadores.size());
-        for (Entrenador entrenador: todosLosEntrenadores){
-            System.out.println(entrenador.toString());
-        }
-        System.out.println("-------------------------------------------------------------");
-    }
+
+
+
 }

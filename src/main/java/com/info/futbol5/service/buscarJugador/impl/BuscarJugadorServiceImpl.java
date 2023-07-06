@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class BuscarJugadorServiceImpl implements BuscarJugadorService {
     @Override
-    public void buscaJugadorxNombre(List<Equipo> todosLosEquipos) {
+    public void buscarJugadorPorNombre(List<Equipo> todosLosEquipos) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Buscar Jugador por nombre");
         System.out.println("-------------------------------------------------------------");

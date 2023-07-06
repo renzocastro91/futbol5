@@ -1,15 +1,15 @@
-package com.info.futbol5.service.importarEJE.impl;
+package com.info.futbol5.service.importarEqupoJugadorEntrenador.impl;
 
 import com.info.futbol5.domain.Entrenador;
 import com.info.futbol5.domain.Equipo;
 import com.info.futbol5.domain.Jugador;
 import com.info.futbol5.service.CargaDB.ServiceCargaDB;
 import com.info.futbol5.service.CargaDB.impl.ServiceCargaDBImpl;
-import com.info.futbol5.service.importarEJE.ImportarEJEService;
+import com.info.futbol5.service.importarEqupoJugadorEntrenador.ImportarEqupoJugadorEntrenadorService;
 
 import java.util.List;
 
-public class ImportarEJEServiceImpl implements ImportarEJEService {
+public class ImportarEqupoJugadorEntrenadorServiceImpl implements ImportarEqupoJugadorEntrenadorService {
     @Override
     public List<Equipo> importaListaDeEquipos() {
         System.out.println("-------------------------------------------------------------");

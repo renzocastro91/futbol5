@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.UUID;
 import java.io.File;
 import java.io.IOException;
-import com.info.futbol5.service.creacionEquipo.ServiceEquipo;
-import com.info.futbol5.service.creacionEquipo.impl.ServiceEquipoImpl;
+import com.info.futbol5.service.entrenador.EntrenadorService;
+import com.info.futbol5.service.entrenador.impl.EntrenadorServiceImpl;
 import com.info.futbol5.service.entrada.console.impl.InputService;
 import org.apache.commons.io.FileUtils;
 import com.info.futbol5.domain.Entrenador;
@@ -19,7 +19,8 @@ import com.info.futbol5.domain.Posicion;
 import com.info.futbol5.service.entrada.file.InputFileService;
 
 public class InputFileServiceImpl implements InputFileService{
-    private ServiceEquipo serviceEquipo = new ServiceEquipoImpl();
+
+    private EntrenadorService entrenadorService = new EntrenadorServiceImpl();
 
     @Override
     public List<Jugador> loadJugadorByFile(String rutaArchivo, List<Equipo> equipos) {
@@ -166,7 +167,7 @@ public class InputFileServiceImpl implements InputFileService{
                     }
                     if (!entrenadorAsignado) {
                         System.out.println("Complete datos del entrenador para el equipo: " + equipo.getNombre());
-                        Entrenador newEntrenador = serviceEquipo.crearEntrenador(equipo);
+                        Entrenador newEntrenador = entrenadorService.crearEntrenador(equipo);
                         entrenadores.add(newEntrenador);
                     }
                 }

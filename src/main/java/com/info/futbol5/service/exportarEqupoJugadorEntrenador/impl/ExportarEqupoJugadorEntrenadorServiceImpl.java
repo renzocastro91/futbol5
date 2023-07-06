@@ -1,9 +1,9 @@
-package com.info.futbol5.service.exportarEJE.impl;
+package com.info.futbol5.service.exportarEqupoJugadorEntrenador.impl;
 
 import com.info.futbol5.domain.Entrenador;
 import com.info.futbol5.domain.Equipo;
 import com.info.futbol5.domain.Jugador;
-import com.info.futbol5.service.exportarEJE.ExportarEJEService;
+import com.info.futbol5.service.exportarEqupoJugadorEntrenador.ExportarEqupoJugadorEntrenadorService;
 import com.info.futbol5.service.ordenarEquipo.OrdenarEquipoService;
 import com.info.futbol5.service.ordenarEquipo.impl.OrdenarEquipoServiceImpl;
 import com.info.futbol5.service.salida.file.OutPutFileService;
@@ -12,10 +12,10 @@ import com.info.futbol5.service.salida.file.impl.OutPutFileServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExportarEJEServiceImpl implements ExportarEJEService {
+public class ExportarEqupoJugadorEntrenadorServiceImpl implements ExportarEqupoJugadorEntrenadorService {
     private OrdenarEquipoService ordenarEquipoService = new OrdenarEquipoServiceImpl();
     @Override
-    public void exporteJugadresOrdenadosXNombre(List<Equipo> todosLosEquipos) {
+    public void exportarJugadresOrdenadosPorNombre(List<Equipo> todosLosEquipos) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Exportacion lista de jugadores ordenados por nombre");
         System.out.println("-------------------------------------------------------------");
@@ -33,7 +33,7 @@ public class ExportarEJEServiceImpl implements ExportarEJEService {
         System.out.println("Archivos de Jugadores exportados con éxito");
     }
     @Override
-    public void exporteJugadoresOrdenadosXNumCamiseta(List<Equipo> todosLosEquipos) {
+    public void exportarJugadoresOrdenadosPorNumeroCamiseta(List<Equipo> todosLosEquipos) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Exportacion lista de jugadores ordenados por N° Camisetas");
         System.out.println("-------------------------------------------------------------");
@@ -51,7 +51,7 @@ public class ExportarEJEServiceImpl implements ExportarEJEService {
         System.out.println("Archivos de Jugadores exportados con éxito");
     }
     @Override
-    public void exporteJugadoresOrdenadosXPosYCam(List<Equipo> todosLosEquipos) {
+    public void exportarJugadoresOrdenadosPorPosicionYNumeroCamiseta(List<Equipo> todosLosEquipos) {
         System.out.println("-------------------------------------------------------------");
         System.out.println("Exportacion lista de jugadores ordenados por Posicion y N° Camisetas");
         System.out.println("-------------------------------------------------------------");
@@ -70,7 +70,7 @@ public class ExportarEJEServiceImpl implements ExportarEJEService {
     }
 
     @Override
-    public void exporteListaDeJugadores(List<Equipo> todosLosEquipos, List<Jugador> todosLosJugadores, List<Entrenador> todosLosEntrenadores) {
+    public void exportarListaDeJugadores(List<Equipo> todosLosEquipos, List<Jugador> todosLosJugadores, List<Entrenador> todosLosEntrenadores) {
         System.out.println("-------------------------------------------------------------");
         OutPutFileService outPutFileService= new OutPutFileServiceImpl();
         String rutaArchivoSalida = "src\\main\\java\\com\\info\\futbol5\\resources\\pruebasalida.txt";

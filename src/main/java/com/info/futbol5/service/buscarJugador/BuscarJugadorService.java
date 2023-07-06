@@ -6,5 +6,5 @@ import java.util.List;
 
 //Abierto para agregar mas tipos de búsqueda para jugador, por ejemplo por número de camiseta, etc
 public interface BuscarJugadorService {
-    void buscaJugadorxNombre(List<Equipo> todosLosEquipos);
+    void buscarJugadorPorNombre(List<Equipo> todosLosEquipos);
 }
